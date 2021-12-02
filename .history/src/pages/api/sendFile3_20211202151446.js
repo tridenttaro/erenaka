@@ -59,8 +59,8 @@ handler.post(async (req, res) => {
   const formData = new FormData();
   // formData.append("file0", "test")
 
-  formData.append('files0', imageBuffer, 
-  // formData.append('file0', imageStream,
+  // formData.append('files[]', imageBuffer, 
+  formData.append('file0', imageStream,
     // fileName,
     // {
     //   filename: fileName,
@@ -70,8 +70,8 @@ handler.post(async (req, res) => {
     // }
   );
   const formHeaders = formData.getHeaders();
-  const formLength = formData.getLength()
-  console.log(formLength)
+  console.log("\n\n[formHeaders]")
+  console.log(formHeaders)
 
   // formData.submit(url, function(err, res) {
   //   // console.log(res.statusCode);
@@ -96,9 +96,9 @@ handler.post(async (req, res) => {
 
   const config = {
     headers: {
-      ...formHeaders,
-      // 'Content-Type': formHeaders["content-type"],
-      // 'Content-Length': 0
+      // ...formHeaders,
+      "Content-Type": formHeaders["content-type"]
+      "Content-Length": 0
     }
   }
   console.log(config)

@@ -70,8 +70,8 @@ handler.post(async (req, res) => {
     // }
   );
   const formHeaders = formData.getHeaders();
-  const formLength = formData.getLength()
-  console.log(formLength)
+  console.log("\n\n[formHeaders]")
+  console.log(formHeaders)
 
   // formData.submit(url, function(err, res) {
   //   // console.log(res.statusCode);

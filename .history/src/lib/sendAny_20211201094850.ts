@@ -4,20 +4,6 @@ import fs from "fs";
 import { DeviceData,  UploadKeys, StateAction, ReceiveFile, SendFile, GetCreateKey } from "../../types/sendAnywhere";
 import { O_TRUNC } from "constants";
 
-export const updateDevice = async (setDeviceData: StateAction<DeviceData>) => {
-  const url = "/api/updateDevice"
-  try {
-    const response:DeviceData = await ky.get(url).json();
-
-    console.log("updateDevice-OK")
-    setDeviceData(response)
-  } catch (error) {
-    console.log("updateDevice-error!: " + error);
-    return;
-  }
-};
-
-
 export const getCreateKey: GetCreateKey = async (name, size, device_key, data, inputUploadKeys, test) => {
   const url = "/api/getCreateKey"
 
@@ -35,6 +21,20 @@ export const getCreateKey: GetCreateKey = async (name, size, device_key, data, i
     sendFile(weblink, data, test)
   } catch (error) {
     console.log("getCreatKey-error!: " + error);
+    return;
+  }
+};
+
+
+export const updateDevice = async (setDeviceData: StateAction<DeviceData>) => {
+  const url = "/api/updateDevice"
+  try {
+    const response:DeviceData = await ky.get(url).json();
+
+    console.log("updateDevice-OK")
+    setDeviceData(response)
+  } catch (error) {
+    console.log("updateDevice-error!: " + error);
     return;
   }
 };
