@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { PrimaryButton } from "../components/atoms";
-import signOutAction from "../lib/firebase/signOutAction";
+import { signOutAction } from "../lib/firebase";
 // signOut
 import { useContext, useCallback } from "react";
 import { AuthContext } from "./Auth";

@@ -49,7 +49,7 @@ const uploadFile = (props: Props) => {
       });
 
       // const tempImageRef = ref(storage, `temp/${fileName}`)
-      const storageRef = ref(storage, `temp/${newFileName}`);
+      const storageRef = ref(storage, "temp");
 
       uploadBytes(storageRef, renamedFile).then((snapshot) => {
         console.log("Uploaded a blob or file!");

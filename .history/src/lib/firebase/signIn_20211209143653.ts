@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
-import { auth, db } from ".";
+import { auth, db } from "./config";
 import { Signed_In, UserState } from "../../types/firebase";
 
 type Props = {

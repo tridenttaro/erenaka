@@ -1,4 +1,4 @@
-import { auth } from ".";
+import { auth } from "./config";
 import { signOut } from "firebase/auth";
 import { Signed_Out } from "../../types/firebase";
 

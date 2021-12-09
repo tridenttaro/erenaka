@@ -44,14 +44,15 @@ const uploadFile = (props: Props) => {
         }
       }
       // 元画像から名前を変更した、ファイルオブジェクトを作成
-      const renamedFile = new File([blob], `${newFileName}.` + fileExtention, {
+      const renamedFile = new File([blob], `${fileName}.` + fileExtention, {
         type: file.type,
       });
 
       // const tempImageRef = ref(storage, `temp/${fileName}`)
-      const storageRef = ref(storage, `temp/${newFileName}`);
+      const storageRef = ref(storage, "temp");
 
-      uploadBytes(storageRef, renamedFile).then((snapshot) => {
+      const metadata = {};
+      uploadBytes(storageRef, file, metadata).then((snapshot) => {
         console.log("Uploaded a blob or file!");
       });
     })

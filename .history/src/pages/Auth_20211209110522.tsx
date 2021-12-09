@@ -2,7 +2,7 @@ import { useEffect, useCallback, useReducer, createContext } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import listenAuthState from "../lib/firebase/listenAuthState";
+import { listenAuthState } from "../lib/firebase";
 import { AuthContextType, UserState } from "../types/firebase";
 
 // ReduxToolkit-useReducerの場合実際は初期化されず型定義しかされない

@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
-import { auth, db } from ".";
+import { auth, db } from "../../firebase/config";
 
 type Props = {
   username: string;

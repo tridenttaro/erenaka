@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "@firebase/auth";
 import { collection, doc, getDoc, getDocs } from "@firebase/firestore";
-import { auth, db } from ".";
+import { auth, db } from "../../firebase/config";
 
 type UserState = {
   isSignedIn: boolean;

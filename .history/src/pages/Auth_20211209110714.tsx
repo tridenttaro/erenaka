@@ -2,7 +2,7 @@ import { useEffect, useCallback, useReducer, createContext } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import listenAuthState from "../lib/firebase/listenAuthState";
+import { listenAuthState } from "../lib/firebase";
 import { AuthContextType, UserState } from "../types/firebase";
 
 // ReduxToolkit-useReducerの場合実際は初期化されず型定義しかされない
@@ -78,7 +78,8 @@ const Auth = (props: Props) => {
   useEffect(() => {
     if (!state.isSignedIn) {
       // サインインしていない
-      listenAuthState({ signed_In: signed_In_callback });
+      // listenAuthState({ signed_In: signed_In_callback });
+      console.log("サインインしてないよ");
     }
   }, [state.isSignedIn, signed_In_callback]);
 
