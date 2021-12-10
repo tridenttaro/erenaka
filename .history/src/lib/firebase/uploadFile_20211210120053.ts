@@ -51,7 +51,7 @@ const uploadFile = (props: Props) => {
       // メタデータに元のファイル名を持たせる
       const metadata = {
         customMetadata: {
-          trueFileName: fileName,
+          trueName: fileName,
         },
       };
       uploadBytes(storageRef, renamedFile, metadata).then((snapshot) => {

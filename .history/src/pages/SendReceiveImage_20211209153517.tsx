@@ -8,13 +8,13 @@ import uploadFile from "../lib/firebase/uploadFile";
 // テスト用
 const SendReceiveImage: NextPage = () => {
   const [imageData, setImageData] = useState<File>();
-  const [downloadKey, setDownloadKey] = useState<string>("");
+  const [receiveKey, setReceiveKey] = useState<string>("");
 
   const inputReceiveKey = useCallback(
     (event) => {
-      setDownloadKey(event.target.value);
+      setReceiveKey(event.target.value);
     },
-    [setDownloadKey]
+    [setReceiveKey]
   );
 
   // useCallbackすべきか???
@@ -56,13 +56,13 @@ const SendReceiveImage: NextPage = () => {
         required={true}
         onChange={inputReceiveKey}
         rows={1}
-        value={downloadKey}
+        value={receiveKey}
         type={"text"}
       />
 
       <PrimaryButton
         label={"RECEIVE FILE"}
-        onClick={() => downloadFile({ downloadKey: downloadKey })}
+        onClick={() => downloadFile(receiveKey)}
       />
     </>
   );

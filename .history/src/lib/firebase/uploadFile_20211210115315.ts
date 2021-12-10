@@ -28,6 +28,7 @@ const uploadFile = (props: Props) => {
         storageFilesNames.push(uploadedFileName);
       });
 
+      // const S="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       const S = "0123456789";
       const N = 5;
       let newFileName = "";
@@ -48,13 +49,14 @@ const uploadFile = (props: Props) => {
       });
 
       const storageRef = ref(storage, `temp/${newFileName}`);
-      // メタデータに元のファイル名を持たせる
       const metadata = {
         customMetadata: {
-          trueFileName: fileName,
+          location: "Yosemite, CA, USA",
+          activity: "Hiking",
         },
       };
-      uploadBytes(storageRef, renamedFile, metadata).then((snapshot) => {
+
+      uploadBytes(storageRef, renamedFile).then((snapshot) => {
         console.log("Uploaded a blob or file!");
       });
     })
