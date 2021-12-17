@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import QRCode from "qrcode.react";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import PrimaryButton from "../components/atoms/PrimaryButton";
 import TextInput from "../components/atoms/TextInput";
@@ -6,16 +7,9 @@ import downloadFile from "../lib/firebase/downloadFile";
 import uploadFile from "../lib/firebase/uploadFile";
 
 // テスト用
-const SendReceiveImage: NextPage = () => {
+const UploadFile: NextPage = () => {
   const [imageData, setImageData] = useState<File>();
   const [downloadKey, setDownloadKey] = useState<string>("");
-
-  const inputReceiveKey = useCallback(
-    (event) => {
-      setDownloadKey(event.target.value);
-    },
-    [setDownloadKey]
-  );
 
   // useCallbackすべきか???
   const handleSetImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +18,10 @@ const SendReceiveImage: NextPage = () => {
     setImageData(iconFile);
     // console.log("setImagedata: " + iconFile)
   };
+
+  const uploadFile_callback = useCallback(() => {
+    uploadFile({ file: imageData, setDownloadKey: setDownloadKey });
+  }, [imageData]);
 
   return (
     <>
@@ -38,34 +36,19 @@ const SendReceiveImage: NextPage = () => {
 
       <PrimaryButton
         label={"SEND FILE"}
-        onClick={() => uploadFile({ file: imageData })}
+        onClick={() => uploadFile_callback()}
       />
       <br />
-      <br />
-      <PrimaryButton label={"TEST"} onClick={() => {}} />
-      <br />
-      <br />
-      <hr />
-
-      <h2>RECEIVE FILE AREA</h2>
-
-      <TextInput
-        fullWidth={false}
-        label={"key"}
-        multiline={false}
-        required={true}
-        onChange={inputReceiveKey}
-        rows={1}
-        value={downloadKey}
-        type={"text"}
-      />
-
-      <PrimaryButton
-        label={"RECEIVE FILE"}
-        onClick={() => downloadFile({ downloadKey: downloadKey })}
-      />
+      {downloadKey != "" && downloadKey != null && (
+        <>
+          <QRCode value="https://google.com" />
+          <div>
+            code<h4>{downloadKey}</h4>
+          </div>
+        </>
+      )}
     </>
   );
 };
 
-export default SendReceiveImage;
+export default UploadFile;
