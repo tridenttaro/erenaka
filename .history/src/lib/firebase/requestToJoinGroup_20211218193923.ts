@@ -1,6 +1,6 @@
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from ".";
-import { UserState } from "../../types/firebase";
+import { UserState } from "../../types/auth";
 
 type Props = {
   userState: UserState;
@@ -10,11 +10,14 @@ type Props = {
 const requestJoinGroup = async (props: Props) => {
   const { userState, groupId, setGroupId } = props;
 
-  if (groupId == "") {
+  if (groupId === "") {
     alert("必須項目が未入力です");
     return false;
   }
-
+  if (groupId === userState.groupId1) {
+    alert("既に参加しているグループです");
+    return;
+  }
   const timestamp = Timestamp.now();
 
   const docRef = doc(db, "groups", groupId);

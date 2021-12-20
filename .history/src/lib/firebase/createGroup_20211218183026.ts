@@ -1,6 +1,6 @@
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from ".";
-import { JoinedGroup, UserState } from "../../types/firebase";
+import { JoinedGroup, UserState } from "../../types/auth";
 
 type Props = {
   userState: UserState;
