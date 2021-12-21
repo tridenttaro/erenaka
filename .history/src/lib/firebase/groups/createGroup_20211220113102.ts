@@ -1,0 +1,61 @@
+import { collection, doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { join } from "path/posix";
+import { db } from "..";
+import { JoinedGroup, UserState } from "../../../types/auth";
+
+type Props = {
+  userState: UserState;
+  groupName: string;
+  setGroupName: (str: string) => void;
+  joinedGroup: JoinedGroup;
+};
+const createGroup = async (props: Props) => {
+  const { groupName, userState, setGroupName } = props;
+
+  if (groupName == "") {
+    alert("必須項目が未入力です");
+    return false;
+  }
+
+  const timestamp = Timestamp.now();
+
+  try {
+    const newGroupRef = doc(collection(db, "groups"));
+    const groupInitialData = {
+      groupId: newGroupRef.id,
+      createdAt: timestamp,
+      groupName: groupName,
+      createdUid: userState.uid,
+      updatedAt: timestamp,
+    };
+    // グループ作成
+    await setDoc(newGroupRef, groupInitialData);
+
+    const userRef = doc(db, "users", userState.uid);
+    const userDocSnap = await getDoc(userRef);
+
+    // 既に参加しているグループを取得
+    if (userDocSnap.exists()) {
+      const userDocData = userDocSnap.data();
+      const joinedGroup: string[] = [];
+      if (userDocData?.joinedGroups) {
+        console.log("グループ初参加ではない");
+        joinedGroup.concat(userDocData.joinedGroups);
+      } else {
+        console.log("グループ初参加");
+      }
+    } else {
+      console.log("No such document!");
+    }
+
+    // 作成者をグループに参加させる
+    await setDoc(userRef, { groupId: newGroupRef.id }, { merge: true });
+
+    setGroupName("");
+    alert("グループの作成が完了しました");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+export default createGroup;
