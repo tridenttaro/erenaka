@@ -2,10 +2,10 @@ import { NextPage } from "next";
 import QRCode from "qrcode.react";
 import { ChangeEvent, useCallback, useState } from "react";
 import PrimaryButton from "../components/atoms/PrimaryButton";
-import uploadFile from "../lib/firebase/uploadFile";
+import uploadFileToTemp from "../lib/firebase/uploadFileToTemp";
 
 // テスト用
-const UploadFile: NextPage = () => {
+const UploadFileToTemp: NextPage = () => {
   const [imageData, setImageData] = useState<File>();
   const [downloadKey, setDownloadKey] = useState<string>("");
 
@@ -18,7 +18,7 @@ const UploadFile: NextPage = () => {
   };
 
   const uploadFile_callback = useCallback(() => {
-    uploadFile({ file: imageData, setDownloadKey: setDownloadKey });
+    uploadFileToTemp({ file: imageData, setDownloadKey: setDownloadKey });
   }, [imageData]);
 
   return (
@@ -52,4 +52,4 @@ const UploadFile: NextPage = () => {
   );
 };
 
-export default UploadFile;
+export default UploadFileToTemp;

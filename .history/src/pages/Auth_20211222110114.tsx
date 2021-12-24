@@ -5,7 +5,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import listenAuthState from "../lib/firebase/listenAuthState";
 import { AuthContextType, UserState } from "../types/auth";
 import { PrimaryButton } from "../components/atoms";
-import useChangePage from "../hooks/useChangePage";
 
 // ReduxToolkit-useReducerの場合実際は初期化されず型定義しかされない
 const initialState: UserState = {
@@ -59,9 +58,22 @@ type Props = {
   children: React.ReactNode;
 };
 const Auth = (props: Props) => {
-  const [changePage] = useChangePage();
+  const router = useRouter();
+  const pathName = router.pathname;
+
   const [state, dispatch] = useReducer(userSlice.reducer, initialState);
   const { signedIn, signedOut, joinedGroup } = userSlice.actions;
+
+  console.log("Authレンダリング発生");
+  console.log("pathName: " + pathName);
+  console.log("userState: " + JSON.stringify(state));
+
+  useEffect(() => {
+    if (!state.isSignedIn) {
+      // サインインしていない
+      listenAuthState({ signedIn });
+    }
+  }, [state.isSignedIn, signedIn]);
 
   const signedInCallback = useCallback(
     (userState: UserState) => {
@@ -79,19 +91,6 @@ const Auth = (props: Props) => {
     },
     [dispatch, joinedGroup]
   );
-
-  const router = useRouter();
-  const pathName = router.pathname;
-
-  console.log("Authレンダリング発生");
-  console.log("pathName: " + pathName);
-  console.log("userState: " + JSON.stringify(state));
-  useEffect(() => {
-    if (!state.isSignedIn) {
-      // サインインしていない
-      listenAuthState({ signedIn: signedInCallback });
-    }
-  }, [state.isSignedIn, signedInCallback]);
 
   const contextValue = {
     state: state,
@@ -111,7 +110,7 @@ const Auth = (props: Props) => {
         <p>ログインが必要です</p>
         <PrimaryButton
           label={"ログインページへ"}
-          onClick={() => changePage({ path: "/SignIn" })}
+          onClick={() => router.push("/SignIn")}
         />
       </>
     );
