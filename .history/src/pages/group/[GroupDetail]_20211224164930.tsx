@@ -18,12 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const groupInfo = "";
   const directories = await getDirectories({ groupId });
   // const ImagesDirectlyUnderGroup = await getImages()
-
-  const imagesCount = 0;
-  // 表示件数
-  const perPage = 2;
-  const pagesCount = Math.ceil(imagesCount / perPage);
-
+  // groupをuseReducerに持たせる...?
   console.log("ssr u");
 
   const props: Props = {
@@ -55,7 +50,7 @@ const GroupDetail = (props: Props) => {
       </div>
 
       <br />
-      {/* <ImageList /> */}
+      <ImageList />
       <br />
       <CreateDirectory
         groupId={groupId}

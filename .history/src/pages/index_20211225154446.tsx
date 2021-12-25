@@ -34,11 +34,8 @@ const Home: NextPage = () => {
 
         <div className={styles.grid}>
           <p>テスト用</p>
-          <Link href="/group/[GroupDetail]" as="/group/unko">
+          <Link href="/group/[GroupDetail]" as="`/group/${props.groupId}`">
             <a className={styles.card}>動的ルーティング</a>
-          </Link>
-          <Link href="/group/[GroupDetail]" as="/group/unko/geri">
-            <a className={styles.card}>動的ルーティング2</a>
           </Link>
           <Link href="/Test">
             <a className={styles.card}>TestTest</a>

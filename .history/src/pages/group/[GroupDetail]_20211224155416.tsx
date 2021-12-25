@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useCallback, useEffect, useState } from "react";
-import { DirectoryCard } from "../../components/molecules";
-import { ImageList } from "../../components/organisms";
+import { PrimaryButton, TextInput } from "../../components/atoms";
+import DirectoryCard from "../../components/molecules/DirectoryCard";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
 import { DirectoryInfo } from "../../types/other";
@@ -17,13 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const groupInfo = "";
   const directories = await getDirectories({ groupId });
-  // const ImagesDirectlyUnderGroup = await getImages()
-
-  const imagesCount = 0;
-  // 表示件数
-  const perPage = 2;
-  const pagesCount = Math.ceil(imagesCount / perPage);
-
+  // groupをuseReducerに持たせる...?
   console.log("ssr u");
 
   const props: Props = {
@@ -54,14 +48,13 @@ const GroupDetail = (props: Props) => {
           ))}
       </div>
 
-      <br />
-      {/* <ImageList /> */}
-      <br />
       <CreateDirectory
         groupId={groupId}
         updateDirectories={updateDirectories}
       />
+
       <br />
+
       <UploadFileToGroup groupId={groupId} />
     </>
   );

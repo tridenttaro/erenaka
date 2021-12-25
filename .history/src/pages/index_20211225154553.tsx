@@ -37,9 +37,6 @@ const Home: NextPage = () => {
           <Link href="/group/[GroupDetail]" as="/group/unko">
             <a className={styles.card}>動的ルーティング</a>
           </Link>
-          <Link href="/group/[GroupDetail]" as="/group/unko/geri">
-            <a className={styles.card}>動的ルーティング2</a>
-          </Link>
           <Link href="/Test">
             <a className={styles.card}>TestTest</a>
           </Link>
