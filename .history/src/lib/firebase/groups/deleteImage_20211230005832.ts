@@ -1,0 +1,38 @@
+import { doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
+import { db, storage } from "..";
+
+type Props = {
+  imageId: string;
+  groupId: string;
+  currentDirectory: string[];
+};
+
+const deleteImage = async (props: Props) => {
+  const { imageId, groupId, currentDirectory } = props;
+
+  const cdStr =
+    currentDirectory.length > 0 ? "/" + currentDirectory.join("/") : "";
+  const storageRef = ref(storage, `groups/${groupId}${cdStr}/${imageId}`);
+
+  let storeRef = doc(db, "groups", groupId, "images", imageId);
+  if (currentDirectory.length > 0) {
+    const cdStr2: string[] = [];
+    cdStr2.push("directories");
+    currentDirectory.forEach((dir, i) => {
+      cdStr2.push(dir);
+      i < currentDirectory.length - 1 && cdStr2.push("directories");
+    });
+    cdStr2.push("images");
+
+    storeRef = doc(db, "groups", groupId, ...cdStr2, imageId);
+  }
+
+  try {
+    await deleteObject(storageRef);
+  } catch (error) {
+    alert("削除に失敗しました。");
+  }
+};
+
+export default deleteImage;
