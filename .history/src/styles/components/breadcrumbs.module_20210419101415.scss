@@ -1,0 +1,23 @@
+.bc_ol {
+  background-color: rgb(177, 212, 195);
+  display: inline-block;
+  margin: 0;
+  padding: 5px 5px 5px 1px;
+  list-style: none;
+
+  .bc_li {
+    float: left;
+    
+    .arrow {
+      display: inline-block;
+    }
+  }
+}
+
+// スマホサイズ以下レスポンシブ
+@media screen and (max-width: 639px) {
+  .bc_ol {
+    padding: 2px 3px 2px 1px;
+    font-size: 80%;
+  }
+}
