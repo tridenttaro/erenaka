@@ -99,7 +99,6 @@ const GroupDetail = (props: Props) => {
       <Breadcrumbs lists={bc_lists} />
 
       <section className="c-section-wrapin">
-        <h2>ディレクトリ</h2>
         <div className="p-grid__row">
           {directories.length > 0 &&
             directories.map((dir) => (

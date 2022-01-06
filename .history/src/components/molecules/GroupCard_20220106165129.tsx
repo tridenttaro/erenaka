@@ -5,14 +5,12 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  CardMedia,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCallback, useState } from "react";
-import { GroupData, ImageData } from "../../types/other";
+import { GroupData } from "../../types/other";
 import { useRouter } from "next/dist/client/router";
-import deleteImage from "../../lib/firebase/groups/deleteImage";
 
 const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
@@ -27,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
       margin: 16,
       width: "calc(33.3333% - 32px)", // 16pxはmargin分
     },
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#A1E67C",
     "&:hover": {
-      backgroundColor: "#DFDFDF",
+      backgroundColor: "#91D66C",
     },
   },
   content: {
@@ -51,23 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type Props = ImageData & {
-  groupId: string;
-  currentDirectory: string[];
-  updateImages: () => void;
-};
+type Props = GroupData;
 
-const ImageCard = (props: Props) => {
-  const {
-    imageId,
-    createdAt,
-    fileName,
-    uploadedUid,
-    downloadUrl,
-    groupId,
-    currentDirectory,
-    updateImages,
-  } = props;
+const GroupCard = (props: Props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
@@ -79,37 +63,35 @@ const ImageCard = (props: Props) => {
     setAnchorEl(null);
   }, []);
 
-  const deleteImageCallback = useCallback(() => {
-    deleteImage({ imageId, groupId, currentDirectory, updateImages });
-  }, [imageId, groupId, currentDirectory, updateImages]);
-
   return (
     <Card className={classes.root}>
-      <CardMedia
-        image={downloadUrl}
-        className={classes.media}
-        title=""
-        // onClick={() => dispatch(push("/product/" + id))}
-      />
       <CardContent className={classes.content}>
         <div
-        // onClick={() =>
-        //   router.push("/group/[...GroupDetail]", `/group/${groupId}`)
-        // }
+          onClick={() =>
+            router.push("/group/[...GroupDetail]", `/group/${props.groupId}`)
+          }
         >
           <Typography component="p" color="textSecondary" display="inline">
-            {"ファイル名: "}
+            {"グループ名: "}
           </Typography>
           <Typography component="p" className={classes.price} display="inline">
-            {fileName}
+            {props.groupName}
           </Typography>
           <br />
 
           <Typography component="p" color="textSecondary" display="inline">
-            {"ImageID: "}
+            {"GroupID: "}
           </Typography>
           <Typography component="p" display="inline">
-            {imageId}
+            {props.groupId}
+          </Typography>
+          <br />
+
+          <Typography component="p" color="textSecondary" display="inline">
+            {"更新日時: "}
+          </Typography>
+          <Typography component="p" display="inline">
+            {props.updatedAt}
           </Typography>
           <br />
 
@@ -117,15 +99,15 @@ const ImageCard = (props: Props) => {
             {"作成日時: "}
           </Typography>
           <Typography component="p" display="inline">
-            {createdAt}
+            {props.createdAt}
           </Typography>
           <br />
 
           <Typography component="p" color="textSecondary" display="inline">
-            {"送信者ID: "}
+            {"管理者ID: "}
           </Typography>
           <Typography component="p" display="inline">
-            {uploadedUid}
+            {props.createdUid}
           </Typography>
           <br />
         </div>
@@ -142,11 +124,10 @@ const ImageCard = (props: Props) => {
         >
           <MenuItem
             onClick={() => {
-              deleteImageCallback();
               handleClose();
             }}
           >
-            画像を削除
+            グループから抜ける(仮)
           </MenuItem>
         </Menu>
       </CardContent>
@@ -154,4 +135,4 @@ const ImageCard = (props: Props) => {
   );
 };
 
-export default ImageCard;
+export default GroupCard;

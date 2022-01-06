@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
       width: "calc(33.3333% - 32px)", // 16pxはmargin分
     },
     backgroundColor: "rgb(255,240,180)",
-    "&:hover": {
-      backgroundColor: "#DFD094",
-    },
   },
   content: {
     display: "flex",

@@ -21,14 +21,18 @@ type Props = {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const urlStr = (context?.params?.GroupDetail || []) as string[];
   const groupId = urlStr[0];
-  const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
+  let currentDirectory: string[] = [];
   const groupInfo = "";
 
   const nowPage = (context?.query?.p || "1") as string;
   // 表示件数
-  const perPage = 12;
+  const perPage = 3;
 
   console.log("nowPage: " + JSON.stringify(nowPage));
+
+  if (urlStr.length > 1) {
+    currentDirectory = urlStr.slice(1);
+  }
 
   const directories: DirectoryData[] = await getDirectories({
     groupId,
@@ -98,20 +102,17 @@ const GroupDetail = (props: Props) => {
 
       <Breadcrumbs lists={bc_lists} />
 
-      <section className="c-section-wrapin">
-        <h2>ディレクトリ</h2>
-        <div className="p-grid__row">
-          {directories.length > 0 &&
-            directories.map((dir) => (
-              <DirectoryCard
-                key={dir.directoryName}
-                groupId={groupId}
-                currentDirectory={currentDirectory}
-                dirInfo={dir}
-              />
-            ))}
-        </div>
-      </section>
+      <div className="p-grid__row">
+        {directories.length > 0 &&
+          directories.map((dir) => (
+            <DirectoryCard
+              key={dir.directoryName}
+              groupId={groupId}
+              currentDirectory={currentDirectory}
+              dirInfo={dir}
+            />
+          ))}
+      </div>
 
       <br />
       <ImageList

@@ -19,16 +19,16 @@ type Props = {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const urlStr = (context?.params?.GroupDetail || []) as string[];
-  const groupId = urlStr[0];
-  const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
+  const params = (context?.params?.GroupDetail || []) as string[];
+  const groupId = params[0];
+  let currentDirectory: string[] = [];
   const groupInfo = "";
 
-  const nowPage = (context?.query?.p || "1") as string;
-  // 表示件数
-  const perPage = 12;
+  console.log("params" + params);
 
-  console.log("nowPage: " + JSON.stringify(nowPage));
+  if (params.length > 1) {
+    currentDirectory = params.slice(1);
+  }
 
   const directories: DirectoryData[] = await getDirectories({
     groupId,
@@ -41,7 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   // // 余裕があればページング
   // const imagesCount = 0;
-
+  // // 表示件数
+  // const perPage = 3;
   // const pagesCount = Math.ceil(imagesCount / perPage);
 
   const props: Props = {
@@ -98,20 +99,17 @@ const GroupDetail = (props: Props) => {
 
       <Breadcrumbs lists={bc_lists} />
 
-      <section className="c-section-wrapin">
-        <h2>ディレクトリ</h2>
-        <div className="p-grid__row">
-          {directories.length > 0 &&
-            directories.map((dir) => (
-              <DirectoryCard
-                key={dir.directoryName}
-                groupId={groupId}
-                currentDirectory={currentDirectory}
-                dirInfo={dir}
-              />
-            ))}
-        </div>
-      </section>
+      <div className="p-grid__row">
+        {directories.length > 0 &&
+          directories.map((dir) => (
+            <DirectoryCard
+              key={dir.directoryName}
+              groupId={groupId}
+              currentDirectory={currentDirectory}
+              dirInfo={dir}
+            />
+          ))}
+      </div>
 
       <br />
       <ImageList

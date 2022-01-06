@@ -98,20 +98,17 @@ const GroupDetail = (props: Props) => {
 
       <Breadcrumbs lists={bc_lists} />
 
-      <section className="c-section-wrapin">
-        <h2>ディレクトリ</h2>
-        <div className="p-grid__row">
-          {directories.length > 0 &&
-            directories.map((dir) => (
-              <DirectoryCard
-                key={dir.directoryName}
-                groupId={groupId}
-                currentDirectory={currentDirectory}
-                dirInfo={dir}
-              />
-            ))}
-        </div>
-      </section>
+      <div className="p-grid__row">
+        {directories.length > 0 &&
+          directories.map((dir) => (
+            <DirectoryCard
+              key={dir.directoryName}
+              groupId={groupId}
+              currentDirectory={currentDirectory}
+              dirInfo={dir}
+            />
+          ))}
+      </div>
 
       <br />
       <ImageList

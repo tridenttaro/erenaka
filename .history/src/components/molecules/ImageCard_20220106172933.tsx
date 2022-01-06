@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
     backgroundColor: "#FFFFFF",
     "&:hover": {
-      backgroundColor: "#DFDFDF",
+      backgroundColor: "#EFEFEF",
     },
   },
   content: {
