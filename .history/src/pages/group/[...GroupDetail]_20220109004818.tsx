@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DirectoryCard } from "../../components/molecules";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
@@ -10,7 +10,6 @@ import UploadImageToGroup from "./UploadImageToGroup";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { Breadcrumbs } from "../../components/molecules";
-import { CircularProgress } from "@material-ui/core";
 
 type Props = {
   groupId: string;
@@ -97,15 +96,18 @@ const GroupDetail = (props: Props) => {
 
       <Breadcrumbs lists={bc_lists} />
 
-      <Suspense fallback={<CircularProgress />}>
-        <DirectoryList {...{ groupId, currentDirectory, directories }} />
-      </Suspense>
+      <DirectoryList {...{ groupId, currentDirectory, directories }} />
 
+      <br />
       <ImageList
-        {...{ groupId, currentDirectory, imageDataList, updateImages }}
+        groupId={groupId}
+        currentDirectory={currentDirectory}
+        imageDataList={imageDataList}
+        updateImages={updateImages}
       />
-
+      <br />
       <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} />
+      <br />
 
       <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
     </div>

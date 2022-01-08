@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DirectoryCard } from "../../components/molecules";
-import { DirectoryList, ImageList } from "../../components/organisms";
+import { ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
 import getImages from "../../lib/firebase/groups/getImages";
@@ -10,7 +10,6 @@ import UploadImageToGroup from "./UploadImageToGroup";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { Breadcrumbs } from "../../components/molecules";
-import { CircularProgress } from "@material-ui/core";
 
 type Props = {
   groupId: string;
@@ -28,8 +27,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const nowPage = (context?.query?.p || "1") as string;
   // 表示件数
   const perPage = 12;
-  // const imagesCount = 0;
-  // const pagesCount = Math.ceil(imagesCount / perPage);
 
   console.log("nowPage: " + JSON.stringify(nowPage));
 
@@ -42,6 +39,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     groupId,
     currentDirectory,
   });
+  // // 余裕があればページング
+  // const imagesCount = 0;
+
+  // const pagesCount = Math.ceil(imagesCount / perPage);
 
   const props: Props = {
     groupId: groupId,
@@ -97,17 +98,40 @@ const GroupDetail = (props: Props) => {
 
       <Breadcrumbs lists={bc_lists} />
 
-      <Suspense fallback={<CircularProgress />}>
-        <DirectoryList {...{ groupId, currentDirectory, directories }} />
-      </Suspense>
+      <section className="c-section-wrapin">
+        <h2>ディレクトリ</h2>
+        <div className="p-grid__row">
+          {directories.length > 0 &&
+            directories.map((dir) => (
+              <DirectoryCard
+                key={dir.directoryName}
+                groupId={groupId}
+                currentDirectory={currentDirectory}
+                dirInfo={dir}
+              />
+            ))}
+        </div>
+      </section>
 
+      <br />
       <ImageList
-        {...{ groupId, currentDirectory, imageDataList, updateImages }}
+        groupId={groupId}
+        currentDirectory={currentDirectory}
+        imageDataList={imageDataList}
+        updateImages={updateImages}
       />
-
-      <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} />
-
-      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
+      <br />
+      <CreateDirectory
+        groupId={groupId}
+        currentDirectory={currentDirectory}
+        updateDirectories={updateDirectories}
+      />
+      <br />
+      <UploadImageToGroup
+        groupId={groupId}
+        currentDirectory={currentDirectory}
+        updateImages={updateImages}
+      />
     </div>
   );
 };

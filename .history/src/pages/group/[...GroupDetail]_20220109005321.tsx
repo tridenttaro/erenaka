@@ -94,12 +94,11 @@ const GroupDetail = (props: Props) => {
       <Head>
         <title>電子名刺 | グループ詳細</title>
       </Head>
-
-      <Breadcrumbs lists={bc_lists} />
-
       <Suspense fallback={<CircularProgress />}>
-        <DirectoryList {...{ groupId, currentDirectory, directories }} />
+        <Breadcrumbs lists={bc_lists} />
       </Suspense>
+
+      <DirectoryList {...{ groupId, currentDirectory, directories }} />
 
       <ImageList
         {...{ groupId, currentDirectory, imageDataList, updateImages }}

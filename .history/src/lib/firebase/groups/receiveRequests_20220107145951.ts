@@ -39,10 +39,9 @@ const receiveRequests = async (props: Props) => {
     return;
   }
 
-  // 参加済みのグループ
   const joinedGroups = userState.joinedGroups;
 
-  // 自身が管理者(作成者)であるグループリスト
+  // 自身が管理者(作成者)であるグループリストを作成
   type CreatedGroup = {
     groupId: string;
     groupName: string;

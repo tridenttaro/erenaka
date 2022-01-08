@@ -13,12 +13,12 @@ const acceptRequests = async (props: Props) => {
   const userRef = doc(db, "users", uid);
 
   // 申請者の参加済みグループを取得
-  const docSnap = await getDoc(userRef);
-  if (docSnap.exists()) {
-    const docData = docSnap.data();
-    const joinedGroups: string[] = docData.joinedGroups;
+  const userDocSnap = await getDoc(userRef);
+  if (userDocSnap.exists()) {
+    const userDocData = userDocSnap.data();
+    const joinedGroups: string[] = userDocData.joinedGroups;
 
-    // 既に参加しているグループに申請が送信されてしまっていた場合、回避
+    // 何らかの原因で既に参加しているグループに申請が送信されてしまっていた場合の対処
     if (!joinedGroups.includes(groupId)) {
       joinedGroups.push(groupId);
       try {
