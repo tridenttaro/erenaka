@@ -54,7 +54,7 @@ const SignUp: NextPage = () => {
 
       <TextInput
         fullWidth={true}
-        label={"ユーザー名"}
+        label={"氏名"}
         multiline={false}
         required={true}
         rows={1}
