@@ -108,7 +108,7 @@ const GroupDetail = (props: Props) => {
 
       {/* <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} /> */}
 
-      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
+      {/* <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} /> */}
     </div>
   );
 };

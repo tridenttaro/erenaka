@@ -6,7 +6,7 @@ import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
 import getImages from "../../lib/firebase/groups/getImages";
 import { DirectoryData, ImageData } from "../../types/other";
-import { UploadImageToGroup } from "../../components/organisms";
+import UploadImageToGroup from "../../components/organisms";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { BreadCrumbs } from "../../components/molecules";
@@ -108,7 +108,7 @@ const GroupDetail = (props: Props) => {
 
       {/* <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} /> */}
 
-      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
+      {/* <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} /> */}
     </div>
   );
 };

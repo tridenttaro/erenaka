@@ -1,9 +1,9 @@
 import { useRouter } from "next/dist/client/router";
 import { ChangeEvent, useCallback, useContext, useState } from "react";
-import { AuthContext } from "../../components/organisms/AuthLayout";
+import { AuthContext } from "./AuthLayout";
 import uploadImage from "../../lib/firebase/uploadImage";
 import { UserState } from "../../types/auth";
-import { PrimaryButton } from "../../components/atoms";
+import { PrimaryButton } from "../atoms";
 import groupStyles from "../../styles/group.module.scss";
 
 type Props = {

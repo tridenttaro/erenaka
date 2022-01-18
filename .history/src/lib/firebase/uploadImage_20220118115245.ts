@@ -15,7 +15,7 @@ type Props = {
 
   // 会社のストレージへアップロード時
   businessCardData?: BusinessCardData;
-  setBusinessCardData?: (data: BusinessCardData) => void;
+  setBusinessCardData?: ({}) => void;
 };
 
 const uploadImage = async (props: Props) => {
@@ -134,19 +134,6 @@ const uploadImage = async (props: Props) => {
     // 画面を更新(画像交換時を"除く")
     if (props.updateImages) {
       props.updateImages();
-    }
-    // 入力欄を初期化
-    if (props.setBusinessCardData) {
-      props.setBusinessCardData({
-        company: "",
-        username: "",
-        position: "",
-        address: "",
-        telephoneNumber: "",
-        fax: "",
-        email: "",
-        others: "",
-      });
     }
 
     alert("画像のアップロードが完了しました");
