@@ -100,8 +100,13 @@ const uploadImage = async (props: Props) => {
     await uploadBytes(storageRef, renamedFile, metadata);
 
     // 入力情報の保存
-    const userRef = doc(db, "users", userState.uid, "lastData", "lastData");
-    await setDoc(userRef, { ...props.businessCardData });
+    const userRef = doc(db, "users", userState.uid, "lastData");
+    const lastData = { ...props.businessCardData };
+    await setDoc(
+      userRef,
+      { company: props.businessCardData?.company },
+      { merge: true }
+    );
 
     // firestoreに登録(会社のストレージへアップロード時)
     if (groupId) {

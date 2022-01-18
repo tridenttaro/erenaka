@@ -1,5 +1,4 @@
-import { NextPage } from "next";
-import QRCode from "qrcode.react";
+import { useRouter } from "next/dist/client/router";
 import {
   ChangeEvent,
   useCallback,
@@ -7,25 +6,26 @@ import {
   useEffect,
   useState,
 } from "react";
-import { SelectBox, TextInput } from "../components/atoms";
-import PrimaryButton from "../components/atoms/PrimaryButton";
-import { AuthContext } from "../components/organisms/AuthLayout";
-import getLastData from "../lib/firebase/getLastData";
-import getGroupsInfo from "../lib/firebase/groups/getGroupsInfo";
-import uploadImage from "../lib/firebase/uploadImage";
-import { UserState } from "../types/auth";
-import { BusinessCardData } from "../types/other";
+import { AuthContext } from "./AuthLayout";
+import uploadImage from "../../lib/firebase/uploadImage";
+import { UserState } from "../../types/auth";
+import { PrimaryButton, TextInput } from "../atoms";
+import groupStyles from "../../styles/group.module.scss";
+import { BusinessCardData } from "../../types/other";
+import getLastData from "../../lib/firebase/getLastData";
 
-const UploadFileToTemp: NextPage = () => {
+type Props = {
+  groupId: string;
+  currentDirectory: string[];
+  updateImages?: () => void;
+};
+
+const UploadImageToGroup = (props: Props) => {
+  const { groupId, currentDirectory, updateImages } = props;
+  const [image, setImage] = useState<File>();
   const context = useContext(AuthContext);
   const userState = context?.state as UserState;
-  // const joinedGroupsId = userState.joinedGroups;
-  const [image, setImage] = useState<File>();
-  const [downloadKey, setDownloadKey] = useState<string>("");
-  // const [joinedGroupsInfo, setJoinedGroupsInfo] = useState<
-  //   { id: string; name: string }[]
-  // >([]);
-  // const [disabledCompTextInput, setDisabledCompTextInput] = useState(true);
+  const router = useRouter();
 
   // 名刺情報用
   const [businessCardData, setBusinessCardData] = useState<BusinessCardData>({
@@ -40,23 +40,14 @@ const UploadFileToTemp: NextPage = () => {
   });
 
   // useEffect(() => {
-  //   (async () => {
-  //     await getGroupsInfo({
-  //       joinedGroupsId,
-  //       setJoinedGroupsInfo,
-  //     });
+  //   // setUsername(userState.username);
+  //   setBusinessCardData((prevState: BusinessCardData) => ({
+  //     ...prevState,
+  //     username: userState.username,
+  //   }));
+  // }, [userState]);
 
-  //     setJoinedGroupsInfo((prevState) => [
-  //       ...prevState,
-  //       { id: "other", name: "その他(テキスト入力)" },
-  //     ]);
-  //   })();
-  // }, [joinedGroupsId]);
-
-  // useEffect(() => {
-  //   if (company === "oher") setDisabledCompTextInput(false);
-  // }, [company]);
-
+  // 前回の入力情報の取得
   useEffect(() => {
     getLastData({ userState, setBusinessCardData });
   }, [userState]);
@@ -67,9 +58,24 @@ const UploadFileToTemp: NextPage = () => {
     setImage(iconFile);
   };
 
-  const uploadImage_callback = useCallback(() => {
-    uploadImage({ image, setDownloadKey, userState, businessCardData });
-  }, [image, userState, businessCardData]);
+  const uploadFile_callback = useCallback(() => {
+    uploadImage({
+      image,
+      groupId,
+      currentDirectory,
+      userState,
+      businessCardData,
+      setBusinessCardData,
+      updateImages,
+    });
+  }, [
+    image,
+    groupId,
+    currentDirectory,
+    userState,
+    businessCardData,
+    updateImages,
+  ]);
 
   // 名刺情報用
   const inputCompany = useCallback((event) => {
@@ -122,25 +128,18 @@ const UploadFileToTemp: NextPage = () => {
   }, []);
 
   return (
-    <>
-      <h2>SEND FILE</h2>
+    <div>
+      <h2>画像アップロード</h2>
       <label>
         <input
           type="file"
-          accept="image/*,.png,.jpg,.jpeg"
+          accept="image/*"
+          // accept="image/*,.png,.jpg,.jpeg"
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleSetImage(e)}
         />
       </label>
       <br />
-
-      {/* <SelectBox
-        label={"会社名"}
-        required={true}
-        options={}
-        select={setCompany}
-        value={company}
-      /> */}
-
+      <br />
       <TextInput
         fullWidth={false}
         label={"会社名"}
@@ -230,26 +229,13 @@ const UploadFileToTemp: NextPage = () => {
         type={"text"}
       />
       <br />
-      <br />
 
       <PrimaryButton
         label={"SEND FILE"}
-        onClick={() => uploadImage_callback()}
+        onClick={() => uploadFile_callback()}
       />
-      <br />
-      {downloadKey != "" && downloadKey != null && (
-        <>
-          <QRCode
-            value={downloadKey}
-            style={{ margin: "30px auto auto 30px" }}
-          />
-          <p>
-            downloadKey: <strong>{downloadKey}</strong>
-          </p>
-        </>
-      )}
-    </>
+    </div>
   );
 };
 
-export default UploadFileToTemp;
+export default UploadImageToGroup;

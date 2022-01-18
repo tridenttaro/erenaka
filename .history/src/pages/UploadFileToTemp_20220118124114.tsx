@@ -10,7 +10,6 @@ import {
 import { SelectBox, TextInput } from "../components/atoms";
 import PrimaryButton from "../components/atoms/PrimaryButton";
 import { AuthContext } from "../components/organisms/AuthLayout";
-import getLastData from "../lib/firebase/getLastData";
 import getGroupsInfo from "../lib/firebase/groups/getGroupsInfo";
 import uploadImage from "../lib/firebase/uploadImage";
 import { UserState } from "../types/auth";
@@ -58,7 +57,11 @@ const UploadFileToTemp: NextPage = () => {
   // }, [company]);
 
   useEffect(() => {
-    getLastData({ userState, setBusinessCardData });
+    // setUsername(userState.username);
+    setBusinessCardData((prevState: BusinessCardData) => ({
+      ...prevState,
+      username: userState.username,
+    }));
   }, [userState]);
 
   const handleSetImage = (e: ChangeEvent<HTMLInputElement>) => {

@@ -100,7 +100,7 @@ const uploadImage = async (props: Props) => {
     await uploadBytes(storageRef, renamedFile, metadata);
 
     // 入力情報の保存
-    const userRef = doc(db, "users", userState.uid, "lastData", "lastData");
+    const userRef = doc(db, "users", userState.uid, "lastData");
     await setDoc(userRef, { ...props.businessCardData });
 
     // firestoreに登録(会社のストレージへアップロード時)

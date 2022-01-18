@@ -1,5 +1,5 @@
 import { listAll, ref, uploadBytes, getDownloadURL } from "@firebase/storage";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { useRef } from "react";
 import { db, storage } from ".";
 import { UserState } from "../../types/auth";
@@ -100,8 +100,9 @@ const uploadImage = async (props: Props) => {
     await uploadBytes(storageRef, renamedFile, metadata);
 
     // 入力情報の保存
-    const userRef = doc(db, "users", userState.uid, "lastData", "lastData");
-    await setDoc(userRef, { ...props.businessCardData });
+    const userRef = collection(db, "users", userState.uid, "lastData");
+    const lastData = { ...props.businessCardData };
+    await setDoc(userRef, lastData);
 
     // firestoreに登録(会社のストレージへアップロード時)
     if (groupId) {

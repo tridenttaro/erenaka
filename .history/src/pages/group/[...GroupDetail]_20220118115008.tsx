@@ -12,7 +12,6 @@ import Head from "next/head";
 import { BreadCrumbs } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
 import { useRouter } from "next/dist/client/router";
-import getLastData from "../../lib/firebase/getLastData";
 
 type Props = {
   groupId: string;
