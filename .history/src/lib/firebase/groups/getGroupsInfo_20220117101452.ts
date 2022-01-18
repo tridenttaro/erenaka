@@ -12,7 +12,7 @@ type Props = {
 
 const getGroupsInfo = async (props: Props) => {
   // 名刺交換時以外
-  if (props.setGroupsInfo && !props.setJoinedGroupsInfo) {
+  if (props.setGroupsInfo) {
     if (!props.setGroupsInfo) return;
 
     const groupsInfo: GroupData[] = [];

@@ -221,6 +221,7 @@ const UploadFileToTemp: NextPage = () => {
         value={businessCardData.fax as string}
         type={"text"}
       />
+
       <br />
       <TextInput
         fullWidth={true}

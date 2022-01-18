@@ -202,23 +202,23 @@ const UploadFileToTemp: NextPage = () => {
       <br />
       <TextInput
         fullWidth={false}
-        label={"メールアドレス"}
-        multiline={false}
-        required={true}
-        onChange={inputEmail}
-        rows={1}
-        value={businessCardData.email as string}
-        type={"text"}
-      />
-      <br />
-      <TextInput
-        fullWidth={false}
         label={"FAX"}
         multiline={false}
         required={false}
         onChange={inputFax}
         rows={1}
         value={businessCardData.fax as string}
+        type={"text"}
+      />
+      <br />
+      <TextInput
+        fullWidth={false}
+        label={"メールアドレス"}
+        multiline={false}
+        required={true}
+        onChange={inputEmail}
+        rows={1}
+        value={businessCardData.email as string}
         type={"text"}
       />
       <br />

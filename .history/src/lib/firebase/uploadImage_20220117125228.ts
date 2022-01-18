@@ -135,6 +135,8 @@ const uploadImage = async (props: Props) => {
       props.updateImages();
     }
 
+    // props.setImageData(undefined);
+
     alert("画像のアップロードが完了しました");
   } catch (error) {
     alert("アップロードに失敗しました。");

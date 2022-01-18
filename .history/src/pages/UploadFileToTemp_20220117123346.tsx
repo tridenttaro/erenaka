@@ -74,56 +74,6 @@ const UploadFileToTemp: NextPage = () => {
     uploadImage({ image, setDownloadKey, userState, businessCardData });
   }, [image, userState, businessCardData]);
 
-  // 名刺情報用
-  const inputCompany = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      company: event.target.value,
-    }));
-  }, []);
-  const inputUsername = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      username: event.target.value,
-    }));
-  }, []);
-  const inputPositon = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      position: event.target.value,
-    }));
-  }, []);
-  const inputAddress = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      address: event.target.value,
-    }));
-  }, []);
-  const inputTelephoneNumber = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      telephoneNumber: event.target.value,
-    }));
-  }, []);
-  const inputFax = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      fax: event.target.value,
-    }));
-  }, []);
-  const inputEmail = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      email: event.target.value,
-    }));
-  }, []);
-  const inputOthers = useCallback((event) => {
-    setBusinessCardData((prevState) => ({
-      ...prevState,
-      others: event.target.value,
-    }));
-  }, []);
-
   return (
     <>
       <h2>SEND FILE</h2>
@@ -174,7 +124,7 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputPositon}
         rows={1}
-        value={businessCardData.position as string}
+        value={businessCardData.position}
         type={"text"}
       />
       <br />
@@ -185,7 +135,7 @@ const UploadFileToTemp: NextPage = () => {
         required={true}
         onChange={inputAddress}
         rows={1}
-        value={businessCardData.address as string}
+        value={businessCardData.address}
         type={"text"}
       />
       <br />
@@ -196,18 +146,7 @@ const UploadFileToTemp: NextPage = () => {
         required={true}
         onChange={inputTelephoneNumber}
         rows={1}
-        value={businessCardData.telephoneNumber as string}
-        type={"text"}
-      />
-      <br />
-      <TextInput
-        fullWidth={false}
-        label={"メールアドレス"}
-        multiline={false}
-        required={true}
-        onChange={inputEmail}
-        rows={1}
-        value={businessCardData.email as string}
+        value={businessCardData.telephoneNumber}
         type={"text"}
       />
       <br />
@@ -218,7 +157,18 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputFax}
         rows={1}
-        value={businessCardData.fax as string}
+        value={businessCardData.fax}
+        type={"text"}
+      />
+      <br />
+      <TextInput
+        fullWidth={false}
+        label={"メールアドレス"}
+        multiline={false}
+        required={true}
+        onChange={inputEmail}
+        rows={1}
+        value={businessCardData.email}
         type={"text"}
       />
       <br />
@@ -229,7 +179,7 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputOthers}
         rows={3}
-        value={businessCardData.others as string}
+        value={businessCardData.others}
         type={"text"}
       />
       <br />

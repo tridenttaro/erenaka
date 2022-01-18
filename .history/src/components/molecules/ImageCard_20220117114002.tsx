@@ -69,6 +69,7 @@ const ImageCard = (props: Props) => {
     downloadUrl,
     ...businessCardData
   } = imageData;
+  // businessCardData as BusinessCardData & { [key: string]: string | undefined };
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -100,73 +101,27 @@ const ImageCard = (props: Props) => {
         //   router.push("/group/[...GroupDetail]", `/group/${groupId}`)
         // }
         >
-          <Typography component="p" color="textSecondary" display="inline">
-            {`会社名: `}
-          </Typography>
-          <Typography component="p" className={classes.price} display="inline">
-            {businessCardData.company}
-          </Typography>
-          <br />
-          <Typography component="p" color="textSecondary" display="inline">
-            {`氏名: `}
-          </Typography>
-          <Typography component="p" display="inline">
-            {businessCardData.username}
-          </Typography>
-          <br />
-          {businessCardData.position && (
-            <>
-              <Typography component="p" color="textSecondary" display="inline">
-                {`部署・役職名: `}
-              </Typography>
-              <Typography component="p" display="inline">
-                {businessCardData.position}
-              </Typography>
-              <br />
-            </>
-          )}
-          <Typography component="p" color="textSecondary" display="inline">
-            {`住所: `}
-          </Typography>
-          <Typography component="p" display="inline">
-            {businessCardData.address}
-          </Typography>
-          <br />
-          <Typography component="p" color="textSecondary" display="inline">
-            {`電話番号: `}
-          </Typography>
-          <Typography component="p" display="inline">
-            {businessCardData.telephoneNumber}
-          </Typography>
-          <br />
-          <Typography component="p" color="textSecondary" display="inline">
-            {`メール: `}
-          </Typography>
-          <Typography component="p" display="inline">
-            {businessCardData.email}
-          </Typography>
-          <br />
-          {businessCardData.position && (
-            <>
-              <Typography component="p" color="textSecondary" display="inline">
-                {`FAX: `}
-              </Typography>
-              <Typography component="p" display="inline">
-                {businessCardData.fax}
-              </Typography>
-              <br />
-            </>
-          )}
-          {businessCardData.position && (
-            <>
-              <Typography component="p" color="textSecondary" display="inline">
-                {`その他: `}
-              </Typography>
-              <Typography component="p" display="inline">
-                {businessCardData.others}
-              </Typography>
-              <br />
-            </>
+          {/* オブジェクトループ(tsの糞型定義) */}
+          {(Object.keys(businessCardData) as (keyof BusinessCardData)[]).map(
+            (key) => (
+              <div key={key}>
+                <Typography
+                  component="p"
+                  color="textSecondary"
+                  display="inline"
+                >
+                  {`${key}: `}
+                </Typography>
+                <Typography
+                  component="p"
+                  className={classes.price}
+                  display="inline"
+                >
+                  {businessCardData[key]}
+                </Typography>
+                <br />
+              </div>
+            )
           )}
         </div>
 
@@ -180,6 +135,15 @@ const ImageCard = (props: Props) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
+          <MenuItem
+            onClick={() => {
+              deleteImageCallback();
+              handleClose();
+            }}
+          >
+            画像を削除
+          </MenuItem>
+
           <Typography component="p" color="textSecondary" display="inline">
             {"ファイル名: "}
           </Typography>
@@ -210,17 +174,6 @@ const ImageCard = (props: Props) => {
           <Typography component="p" display="inline">
             {uploadedUid}
           </Typography>
-          <br />
-          <hr />
-          <br />
-          <MenuItem
-            onClick={() => {
-              deleteImageCallback();
-              handleClose();
-            }}
-          >
-            画像を削除
-          </MenuItem>
         </Menu>
       </CardContent>
     </Card>

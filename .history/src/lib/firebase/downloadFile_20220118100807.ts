@@ -61,14 +61,7 @@ const downloadFile = async (props: Props) => {
     const email = metadata?.customMetadata?.email;
     const fax = metadata?.customMetadata?.fax;
     const others = metadata?.customMetadata?.others;
-    company && (businessCardData.company = company);
-    username && (businessCardData.username = username);
-    positon && (businessCardData.position = positon);
-    address && (businessCardData.address = address);
-    telephoneNumber && (businessCardData.telephoneNumber = telephoneNumber);
-    email && (businessCardData.email = email);
-    fax && (businessCardData.fax = fax);
-    others && (businessCardData.others = others);
+    businessCardData["company"] = company ? company : "";
 
     const image = new File([response], fileName, {
       type: "application/octet-stream",

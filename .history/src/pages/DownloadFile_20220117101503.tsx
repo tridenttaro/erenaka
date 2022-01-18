@@ -52,7 +52,7 @@ const DownloadFile: NextPage = () => {
       <h2>DOWNLOAD FILE</h2>
 
       <SelectBox
-        label={"アップロード先選択"}
+        label={"アップロード先グループ選択"}
         required={true}
         options={joinedGroupsInfo}
         select={setUpToGroupId}

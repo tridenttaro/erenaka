@@ -42,11 +42,11 @@ export type ImageData = {
 
 export type BusinessCardData = {
   company: string; // 社名
-  username: string; // 名刺差出人氏名
+  username?: string; // 名刺差出人氏名
   position?: string; // 役職名
-  address: string; // 住所
-  telephoneNumber: string; // 電話番号
-  email: string;
+  address?: string; // 住所
+  telephoneNumber?: string; // 電話番号
   fax?: string;
+  email?: string;
   others?: string; // その他
 };

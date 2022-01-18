@@ -18,19 +18,10 @@ type Props = {
 };
 
 const uploadImage = async (props: Props) => {
-  if (!props.image) {
-    alert("画像が選択されていません");
-    return;
-  }
+  if (!props.image) return;
   if (props.businessCardData) {
     const bc = props.businessCardData;
-    if (
-      bc.company == "" ||
-      bc.username == "" ||
-      bc.address == "" ||
-      bc.telephoneNumber == "" ||
-      bc.email == ""
-    ) {
+    if (bc.company || (bc.company === "") | bc.username || bc.username === "") {
       alert("必須項目が入力されていません");
       return;
     }
@@ -134,6 +125,8 @@ const uploadImage = async (props: Props) => {
     if (props.updateImages) {
       props.updateImages();
     }
+
+    // props.setImageData(undefined);
 
     alert("画像のアップロードが完了しました");
   } catch (error) {

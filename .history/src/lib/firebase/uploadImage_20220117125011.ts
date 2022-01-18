@@ -27,9 +27,9 @@ const uploadImage = async (props: Props) => {
     if (
       bc.company == "" ||
       bc.username == "" ||
-      bc.address == "" ||
-      bc.telephoneNumber == "" ||
-      bc.email == ""
+      bc.address ||
+      bc.telephoneNumber ||
+      bc.email
     ) {
       alert("必須項目が入力されていません");
       return;
@@ -134,6 +134,8 @@ const uploadImage = async (props: Props) => {
     if (props.updateImages) {
       props.updateImages();
     }
+
+    // props.setImageData(undefined);
 
     alert("画像のアップロードが完了しました");
   } catch (error) {

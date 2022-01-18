@@ -110,7 +110,7 @@ const ImageCard = (props: Props) => {
           <Typography component="p" color="textSecondary" display="inline">
             {`氏名: `}
           </Typography>
-          <Typography component="p" display="inline">
+          <Typography component="p" className={classes.price} display="inline">
             {businessCardData.username}
           </Typography>
           <br />
@@ -119,7 +119,11 @@ const ImageCard = (props: Props) => {
               <Typography component="p" color="textSecondary" display="inline">
                 {`部署・役職名: `}
               </Typography>
-              <Typography component="p" display="inline">
+              <Typography
+                component="p"
+                className={classes.price}
+                display="inline"
+              >
                 {businessCardData.position}
               </Typography>
               <br />
@@ -128,21 +132,21 @@ const ImageCard = (props: Props) => {
           <Typography component="p" color="textSecondary" display="inline">
             {`住所: `}
           </Typography>
-          <Typography component="p" display="inline">
+          <Typography component="p" className={classes.price} display="inline">
             {businessCardData.address}
           </Typography>
           <br />
           <Typography component="p" color="textSecondary" display="inline">
             {`電話番号: `}
           </Typography>
-          <Typography component="p" display="inline">
+          <Typography component="p" className={classes.price} display="inline">
             {businessCardData.telephoneNumber}
           </Typography>
           <br />
           <Typography component="p" color="textSecondary" display="inline">
             {`メール: `}
           </Typography>
-          <Typography component="p" display="inline">
+          <Typography component="p" className={classes.price} display="inline">
             {businessCardData.email}
           </Typography>
           <br />
@@ -151,7 +155,11 @@ const ImageCard = (props: Props) => {
               <Typography component="p" color="textSecondary" display="inline">
                 {`FAX: `}
               </Typography>
-              <Typography component="p" display="inline">
+              <Typography
+                component="p"
+                className={classes.price}
+                display="inline"
+              >
                 {businessCardData.fax}
               </Typography>
               <br />
@@ -162,7 +170,11 @@ const ImageCard = (props: Props) => {
               <Typography component="p" color="textSecondary" display="inline">
                 {`その他: `}
               </Typography>
-              <Typography component="p" display="inline">
+              <Typography
+                component="p"
+                className={classes.price}
+                display="inline"
+              >
                 {businessCardData.others}
               </Typography>
               <br />
@@ -211,7 +223,6 @@ const ImageCard = (props: Props) => {
             {uploadedUid}
           </Typography>
           <br />
-          <hr />
           <br />
           <MenuItem
             onClick={() => {

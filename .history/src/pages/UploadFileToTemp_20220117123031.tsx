@@ -110,7 +110,6 @@ const UploadFileToTemp: NextPage = () => {
       ...prevState,
       fax: event.target.value,
     }));
-  }, []);
   const inputEmail = useCallback((event) => {
     setBusinessCardData((prevState) => ({
       ...prevState,
@@ -121,7 +120,7 @@ const UploadFileToTemp: NextPage = () => {
     setBusinessCardData((prevState) => ({
       ...prevState,
       others: event.target.value,
-    }));
+    }));  
   }, []);
 
   return (
@@ -174,7 +173,7 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputPositon}
         rows={1}
-        value={businessCardData.position as string}
+        value={businessCardData.position}
         type={"text"}
       />
       <br />
@@ -185,7 +184,7 @@ const UploadFileToTemp: NextPage = () => {
         required={true}
         onChange={inputAddress}
         rows={1}
-        value={businessCardData.address as string}
+        value={businessCardData.address}
         type={"text"}
       />
       <br />
@@ -196,18 +195,7 @@ const UploadFileToTemp: NextPage = () => {
         required={true}
         onChange={inputTelephoneNumber}
         rows={1}
-        value={businessCardData.telephoneNumber as string}
-        type={"text"}
-      />
-      <br />
-      <TextInput
-        fullWidth={false}
-        label={"メールアドレス"}
-        multiline={false}
-        required={true}
-        onChange={inputEmail}
-        rows={1}
-        value={businessCardData.email as string}
+        value={businessCardData.telephoneNumber}
         type={"text"}
       />
       <br />
@@ -218,7 +206,18 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputFax}
         rows={1}
-        value={businessCardData.fax as string}
+        value={businessCardData.fax}
+        type={"text"}
+      />
+      <br />
+      <TextInput
+        fullWidth={false}
+        label={"メールアドレス"}
+        multiline={false}
+        required={true}
+        onChange={inputEmail}
+        rows={1}
+        value={businessCardData.email}
         type={"text"}
       />
       <br />
@@ -229,7 +228,7 @@ const UploadFileToTemp: NextPage = () => {
         required={false}
         onChange={inputOthers}
         rows={3}
-        value={businessCardData.others as string}
+        value={businessCardData.others}
         type={"text"}
       />
       <br />

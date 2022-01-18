@@ -9,12 +9,10 @@ type props = {
   rows: number;
   value: string;
   type: string;
-  disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const TextInput = (props: props) => {
-  const disabled = props.disabled ? props.disabled : false;
   return (
     <TextField
       fullWidth={props.fullWidth}
@@ -26,7 +24,6 @@ const TextInput = (props: props) => {
       value={props.value}
       type={props.type}
       onChange={props.onChange}
-      disabled={disabled}
     />
   );
 };
