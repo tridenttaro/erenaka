@@ -9,7 +9,7 @@ import { DirectoryData, ImageData } from "../../types/other";
 import UploadImageToGroup from "./UploadImageToGroup";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
-import { BreadCrumbs } from "../../components/molecules";
+import { Breadcrumbs } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
 import { useRouter } from "next/dist/client/router";
 
@@ -88,7 +88,7 @@ const GroupDetail = (props: Props) => {
         <title>電子名刺 | グループ詳細</title>
       </Head>
 
-      <BreadCrumbs lists={bc_lists} />
+      <Breadcrumbs lists={bc_lists} />
 
       <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />

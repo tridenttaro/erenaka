@@ -88,7 +88,7 @@ const GroupDetail = (props: Props) => {
         <title>電子名刺 | グループ詳細</title>
       </Head>
 
-      <BreadCrumbs lists={bc_lists} />
+      <Breadcrumbs lists={bc_lists} />
 
       <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
