@@ -90,9 +90,9 @@ const GroupDetail = (props: Props) => {
 
       <BreadCrumbs lists={bc_lists} />
 
-      {/* <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
-      </Suspense> */}
+      </Suspense>
 
       <Suspense fallback={<CircularProgress />}>
         <ImageList
@@ -106,7 +106,7 @@ const GroupDetail = (props: Props) => {
         />
       </Suspense>
 
-      {/* <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} /> */}
+      <CreateDirectory {...{ groupId, currentDirectory, updateDirectories }} />
 
       {/* <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} /> */}
     </div>
