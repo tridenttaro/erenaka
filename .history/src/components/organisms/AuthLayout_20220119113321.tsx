@@ -82,7 +82,7 @@ const AuthLayout = (props: Props) => {
   useEffect(() => {
     if (!state.isSignedIn) {
       // サインインしていない
-      listenAuthState({ signedIn: signedInCallback, setLoading });
+      listenAuthState({ signedIn: signedInCallback });
     }
   }, [state.isSignedIn, signedInCallback]);
 

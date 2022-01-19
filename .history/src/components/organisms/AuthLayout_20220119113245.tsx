@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useCallback,
-  useReducer,
-  createContext,
-  useState,
-} from "react";
+import { useEffect, useCallback, useReducer, createContext, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import listenAuthState from "../../lib/firebase/auth/listenAuthState";
@@ -64,7 +58,7 @@ const AuthLayout = (props: Props) => {
   const router = useRouter();
   const pathName = router.pathname;
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const [state, dispatch] = useReducer(userSlice.reducer, initialState);
   const { signedIn, signedOut, joinedGroup } = userSlice.actions;
 
@@ -82,7 +76,7 @@ const AuthLayout = (props: Props) => {
   useEffect(() => {
     if (!state.isSignedIn) {
       // サインインしていない
-      listenAuthState({ signedIn: signedInCallback, setLoading });
+      listenAuthState({ signedIn: signedInCallback });
     }
   }, [state.isSignedIn, signedInCallback]);
 
@@ -113,14 +107,14 @@ const AuthLayout = (props: Props) => {
       <AuthContext.Provider value={contextValue}>
         <Header />
         {loading ? (
-          <div>
-            <p>Loading...</p>
-            <CircularProgress />
-          </div>
-        ) : !state.isSignedIn &&
-          pathName != "/SignIn" &&
-          pathName != "/SignUp" &&
-          pathName != "/PassReset" ? (
+        <div>
+          <p>Loading...</p>
+          <CircularProgress/>
+          </div>)}
+        {!state.isSignedIn &&
+        pathName != "/SignIn" &&
+        pathName != "/SignUp" &&
+        pathName != "/PassReset" ? (
           <div>
             <p>ログインが必要です</p>
             <PrimaryButton
