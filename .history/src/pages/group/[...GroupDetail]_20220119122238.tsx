@@ -10,6 +10,8 @@ import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { BreadCrumbs } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
+import { useRouter } from "next/dist/client/router";
+import getLastData from "../../lib/firebase/getLastData";
 import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
 import { AuthContext } from "../../components/organisms/AuthLayout";
 import { UserState } from "../../types/auth";
@@ -47,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const GroupDetail = (props: Props) => {
   const { groupId, currentDirectory } = props;
   const [perPage, setPerPage] = useState("25");
-  const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
+  const [groupInfo, setGroupInfo] = useState<GroupData>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
   const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
@@ -72,8 +74,8 @@ const GroupDetail = (props: Props) => {
   }
 
   useEffect(() => {
-    getGroupsInfo({ joinedGroupsId: [groupId], setGroupsInfo });
-  }, [groupId]);
+    getGroupsInfo({ joinedGroupsId: [groupId], setGroupsInfo: setGroupInfo });
+  });
 
   useEffect(() => {
     setDirectories(props.directories);
@@ -98,12 +100,6 @@ const GroupDetail = (props: Props) => {
       </Head>
 
       <BreadCrumbs lists={bc_lists} />
-
-      {groupsInfo && (
-        <p>
-          {groupsInfo[0].groupName} ({groupId})
-        </p>
-      )}
 
       {/* <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />

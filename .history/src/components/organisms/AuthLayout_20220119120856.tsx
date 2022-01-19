@@ -68,6 +68,7 @@ const AuthLayout = (props: Props) => {
   const [state, dispatch] = useReducer(userSlice.reducer, initialState);
   const { signedIn, signedOut, joinedGroup } = userSlice.actions;
 
+  console.log("pathName: " + pathName);
   console.log("userState: " + JSON.stringify(state));
 
   const signedInCallback = useCallback(

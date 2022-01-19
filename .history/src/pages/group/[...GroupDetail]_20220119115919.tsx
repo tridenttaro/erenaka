@@ -1,18 +1,17 @@
 import { GetServerSideProps } from "next";
-import { Suspense, useCallback, useContext, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
 import getImages from "../../lib/firebase/groups/getImages";
-import { DirectoryData, GroupData, ImageData } from "../../types/other";
+import { DirectoryData, ImageData } from "../../types/other";
 import { UploadImageToGroup } from "../../components/organisms";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { BreadCrumbs } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
-import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
-import { AuthContext } from "../../components/organisms/AuthLayout";
-import { UserState } from "../../types/auth";
+import { useRouter } from "next/dist/client/router";
+import getLastData from "../../lib/firebase/getLastData";
 
 type Props = {
   groupId: string;
@@ -24,9 +23,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const urlStr = (context?.params?.GroupDetail || []) as string[];
   const groupId = urlStr[0];
   const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
+  const groupInfo = "";
 
   const nowPage = (context?.query?.p || "1") as string;
   // 表示件数
+  const perPage = 12;
   // const imagesCount = 0;
   // const pagesCount = Math.ceil(imagesCount / perPage);
 
@@ -46,15 +47,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const GroupDetail = (props: Props) => {
   const { groupId, currentDirectory } = props;
-  const [perPage, setPerPage] = useState("25");
-  const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
   const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
-  const context = useContext(AuthContext);
-  const userState = context?.state as UserState;
-
-  // パンくずリスト用
   const browsePath = "/group/[...GroupDetail]";
   let truePath = `/group/${groupId}`;
   const bc_lists = [{ name: "GROUP", path: [browsePath, truePath] }];
@@ -70,10 +65,6 @@ const GroupDetail = (props: Props) => {
     });
     bc_lists.push(...cdItem);
   }
-
-  useEffect(() => {
-    getGroupsInfo({ joinedGroupsId: [groupId], setGroupsInfo });
-  }, [groupId]);
 
   useEffect(() => {
     setDirectories(props.directories);
@@ -94,16 +85,10 @@ const GroupDetail = (props: Props) => {
   return (
     <div className={layout.page}>
       <Head>
-        <title>電子名刺 | 名刺一覧</title>
+        <title>電子名刺 | グループ詳細</title>
       </Head>
 
       <BreadCrumbs lists={bc_lists} />
-
-      {groupsInfo && (
-        <p>
-          {groupsInfo[0].groupName} ({groupId})
-        </p>
-      )}
 
       {/* <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
