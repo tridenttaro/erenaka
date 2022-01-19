@@ -112,7 +112,7 @@ const AuthLayout = (props: Props) => {
       <AuthContext.Provider value={contextValue}>
         <Header />
         {loading ? (
-          <div style={{ margin: "0 auto", textAlign: "center" }}>
+          <div style={{ margin: "0 auto" }}>
             <p>Loading...</p>
             <CircularProgress />
           </div>

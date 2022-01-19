@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { Suspense, useCallback, useEffect, useState } from "react";
+import { DirectoryCard } from "../../components/molecules";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";

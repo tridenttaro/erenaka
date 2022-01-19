@@ -8,7 +8,7 @@ type Props = {
   setLoading: (bool: boolean) => void;
 };
 
-const listenAuthState = (props: Props) => {
+const listenAuthState = async (props: Props) => {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       const uid = user.uid;
@@ -30,13 +30,15 @@ const listenAuthState = (props: Props) => {
         };
         props.signedIn(userState);
       } else {
-        // console.log("No such document!");
+        console.log("No such document!");
       }
-      props.setLoading(false);
     } else {
-      props.setLoading(false);
+      // サインイン画面に移行
+      // props.changePage("/SignIn");
     }
   });
+
+  props.setLoading(false);
 };
 
 export default listenAuthState;
