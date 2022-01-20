@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: "100%",
   },
-  txt: {},
+  txt: {
+    width: "100%",
+  },
   colorTxt: {
     color: theme.palette.secondary.main,
     width: "100%",

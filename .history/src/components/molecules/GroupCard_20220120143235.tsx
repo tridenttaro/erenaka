@@ -29,12 +29,16 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#88C668",
     },
+    // overflowWrap: "break-word",
     wordBreak: "break-word",
   },
   content: {
     display: "flex",
+    width: "100%",
     padding: "16px 8px",
     textAlign: "left",
+    overflowWrap: "break-word",
+    // wordBreak: "break-word",
     "&:last-child": {
       // 疑似要素(Scss似)
       paddingBottom: 16,
@@ -44,7 +48,11 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: "100%",
   },
-  txt: {},
+  txt: {
+    width: "100%",
+    overflowWrap: "break-word",
+    wordBreak: "break-word",
+  },
   colorTxt: {
     color: theme.palette.secondary.main,
     width: "100%",
