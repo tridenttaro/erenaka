@@ -45,7 +45,7 @@ const CreateDirectory = (props: Props) => {
 
   return (
     <>
-      <h2>ディレクトリ作成</h2>
+      <h2 className={groupStyles.title}>ディレクトリ作成</h2>
       <TextInput
         fullWidth={false}
         label={"ディレクトリ名"}

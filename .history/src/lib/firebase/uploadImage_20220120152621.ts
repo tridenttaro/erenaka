@@ -154,19 +154,11 @@ const uploadImage = async (props: Props) => {
       });
     }
 
-    if (props.businessCardData) {
-      alert("グループ への画像のアップロードが完了しました。");
-    } else {
+    if (!props.businessCardData) {
       alert("画像のアップロードが完了しました");
     }
   } catch (error) {
-    if (!props.businessCardData) {
-    }
-    if (props.businessCardData) {
-      alert("グループ へのアップロードに失敗しました。");
-    } else {
-      alert("アップロードに失敗しました。");
-    }
+    alert("アップロードに失敗しました。");
   }
 };
 export default uploadImage;
