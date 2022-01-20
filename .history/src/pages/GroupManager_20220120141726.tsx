@@ -20,7 +20,9 @@ const GroupManager = () => {
         <ReceiveRequests />
       </Suspense>
 
-      <CreateGroup />
+      <Suspense fallback={<CircularProgress />}>
+        <CreateGroup />
+      </Suspense>
 
       <RequestToJoinGroup />
     </>
