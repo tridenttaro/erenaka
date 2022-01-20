@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme) => ({
       margin: 8,
       width: "calc(100% - 16px)", // 16pxはmargin分
     },
-    [theme.breakpoints.up("sm")]: {
-      // 幅がsmの幅(themeファイルで定義)より未満の場合
-      margin: 8,
-      width: "calc(50% - 16px)", // 16pxはmargin分
-    },
     [theme.breakpoints.up("md")]: {
       // md(960px)未満
       margin: 16,
       width: "calc(33.3333% - 32px)", // 16pxはmargin分
     },
+    [theme.breakpoints.down("md")]: {
+      // md(960px)未満
+      margin: 16,
+      width: "calc(33.3333% - 32px)", // 16pxはmargin分
+    },
+    // [theme.breakpoints.up("sm")]: {
+    //   // 幅がsmの幅(themeファイルで定義)より未満の場合
+    //   margin: 8,
+    //   width: "calc(50% - 16px)", // 16pxはmargin分
+    // },
 
     backgroundColor: "#FFFFFF",
     // "&:hover": {
@@ -47,9 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    // height: 0,
-    objectFit: "contain",
-    height: "100px",
+    height: 0,
     paddingTop: "100%",
   },
   price: {

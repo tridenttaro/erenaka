@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       // md(960px)未満
       margin: 16,
       width: "calc(33.3333% - 32px)", // 16pxはmargin分
-    },
+    }
     wordBreak: "break-word",
   },
   content: {

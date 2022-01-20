@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
       margin: 16,
       width: "calc(33.3333% - 32px)", // 16pxはmargin分
     },
+    // [theme.breakpoints.down("md")]: {
+    //   // md(960px)未満
+    //   margin: 16,
+    //   width: "calc(33.3333% - 32px)", // 16pxはmargin分
+    // },
 
     backgroundColor: "#FFFFFF",
     // "&:hover": {

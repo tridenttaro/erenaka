@@ -117,14 +117,14 @@ const ClosableDrawer = (props: Props) => {
           // onClose={(e) => props.onClose(e, false)}
           onKeyDown={(e) => props.onClose(e, false)}
         >
-          {/* <List className={classes.list}>
+          <List className={classes.list}>
             <ListItem>
               <ListItemText>{userState.username}</ListItemText>
             </ListItem>
             <ListItem>
               <ListItemText>uid: {userState.uid}</ListItemText>
             </ListItem>
-          </List> */}
+          </List>
           <Divider />
           {userState?.isSignedIn && (
             <List>

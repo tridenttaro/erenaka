@@ -36,9 +36,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     marginLeft: 32,
   },
-  list: {
-    wordBreak: "break-word",
-  },
 }));
 
 type Props = {
@@ -117,14 +114,11 @@ const ClosableDrawer = (props: Props) => {
           // onClose={(e) => props.onClose(e, false)}
           onKeyDown={(e) => props.onClose(e, false)}
         >
-          {/* <List className={classes.list}>
+          <List>
             <ListItem>
-              <ListItemText>{userState.username}</ListItemText>
+              <ListItemText>aaa</ListItemText>
             </ListItem>
-            <ListItem>
-              <ListItemText>uid: {userState.uid}</ListItemText>
-            </ListItem>
-          </List> */}
+          </List>
           <Divider />
           {userState?.isSignedIn && (
             <List>
