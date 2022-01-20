@@ -16,12 +16,16 @@ const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
   root: {
     [theme.breakpoints.down("sm")]: {
-      // 幅がsmの幅が(themeファイルで定義:600px)より未満の場合
+      // 幅がsmの幅(themeファイルで定義:600px)より未満の場合
+      // margin: 8,
+      // width: "calc(50% - 16px)", // 16pxはmargin分
       margin: 16,
       width: "calc(100% - 32px)",
     },
     [theme.breakpoints.up("sm")]: {
-      // 幅がsmの幅が600px以上の場合
+      // 幅がsmの幅(themeファイルで定義)以上の場合
+      // margin: 16,
+      // width: "calc(33.3333% - 32px)", // 32pxはmargin分
       margin: 8,
       width: "calc(50% - 16px)", // 16pxはmargin分
     },
@@ -36,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: "16px 8px",
     textAlign: "left",
-    overflowWrap: "break-word",
     "&:last-child": {
       // 疑似要素(Scss似)
       paddingBottom: 16,

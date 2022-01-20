@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: "16px 8px",
     textAlign: "left",
-    overflowWrap: "break-word",
     "&:last-child": {
       // 疑似要素(Scss似)
       paddingBottom: 16,
