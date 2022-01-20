@@ -42,30 +42,45 @@ const receiveRequests = async (props: Props) => {
   // 参加済みのグループ
   const joinedGroups = userState.joinedGroups;
 
-  // 自身が管理者(作成者)であるグループリスト
   type CreatedGroup = {
     groupId: string;
     groupName: string;
   };
   const createdGroups: CreatedGroup[] = [];
 
-  const groupsSnaps = await getDocs(collection(db, "groups"));
-  groupsSnaps.forEach((groupsDoc) => {
-    const docData = groupsDoc.data();
+  // 自分が管理者(作成者)である場合のみ取得するコードだが、
+  // 管理が面倒なのでグループメンバーであれば誰でも取得できるようにする(コメントアウト下)
+  // const groupsSnaps = await getDocs(collection(db, "groups"));
+  // groupsSnaps.forEach((groupsDoc) => {
+  //   const docData = groupsDoc.data();
 
-    joinedGroups.forEach((joinedGroup) => {
-      // 自身が参加しているグループであるか
-      if (joinedGroup === docData.groupId) {
-        // 自身が管理者(作成者)であるか
-        if (userState.uid === docData.createdUid) {
-          createdGroups.push({
-            groupId: docData.groupId,
-            groupName: docData.groupName,
-          });
-        }
-      }
-    });
-  });
+  //   joinedGroups.forEach((joinedGroup) => {
+  //     // 自身が参加しているグループであるか
+  //     if (joinedGroup === docData.groupId) {
+  //       // 自身が管理者(作成者)であるか
+  //       if (userState.uid === docData.createdUid) {
+  //         createdGroups.push({
+  //           groupId: docData.groupId,
+  //           groupName: docData.groupName,
+  //         });
+  //       }
+  //     }
+  //   });
+  // });
+  for (const groupId of joinedGroups) {
+    const docRef = doc(db, "groups", groupId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      createdGroups.push({
+        groupId: data.groupId,
+        groupName: data.groupName,
+      });
+    } else {
+      console.log("No such document!");
+    }
+  }
 
   if (createdGroups.length > 0) {
     const requestsList: RequestItem[] = [];

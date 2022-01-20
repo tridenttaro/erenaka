@@ -1,15 +1,34 @@
 import { UserState } from "../../../types/auth";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  Timestamp,
+} from "firebase/firestore";
 import { db } from "..";
 import { RequestItem } from "../../../types/other";
-import createGroup from "./createGroup";
+
+const datetimeToString = (date: Date) => {
+  return (
+    date.getFullYear() +
+    "-" +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2) +
+    " " +
+    ("00" + date.getHours()).slice(-2) +
+    ":" +
+    ("00" + date.getMinutes()).slice(-2)
+  );
+};
 
 type Props = {
   userState: UserState;
   setRequestsList: (requestsList: RequestItem[]) => void;
 };
 const receiveRequests = async (props: Props) => {
-  const { userState } = props;
+  const { userState, setRequestsList } = props;
 
   // 参加グループがない=作成したグループがない=実行しない
   if (
@@ -20,32 +39,38 @@ const receiveRequests = async (props: Props) => {
     return;
   }
 
+  // 参加済みのグループ
   const joinedGroups = userState.joinedGroups;
 
-  // 自身が管理者(作成者)であるグループリストを作成
   type CreatedGroup = {
     groupId: string;
     groupName: string;
   };
   const createdGroups: CreatedGroup[] = [];
 
-  const groupsSnaps = await getDocs(collection(db, "groups"));
-  groupsSnaps.forEach((groupsDoc) => {
-    const docData = groupsDoc.data();
+  // 自分が管理者(作成者)である場合のみ取得するコードだが、
+  // 管理が面倒なのでグループメンバーであれば誰でも取得できるようにする(コメントアウト下)
+  // const groupsSnaps = await getDocs(collection(db, "groups"));
+  // groupsSnaps.forEach((groupsDoc) => {
+  //   const docData = groupsDoc.data();
 
-    joinedGroups.forEach((joinedGroup) => {
-      // 自身が参加しているグループであるか
-      if (joinedGroup === docData.groupId) {
-        // 自身が管理者(作成者)であるか
-        if (userState.uid === docData.createdUid) {
-          createdGroups.push({
-            groupId: docData.groupId,
-            groupName: docData.groupName,
-          });
-        }
-      }
-    });
-  });
+  //   joinedGroups.forEach((joinedGroup) => {
+  //     // 自身が参加しているグループであるか
+  //     if (joinedGroup === docData.groupId) {
+  //       // 自身が管理者(作成者)であるか
+  //       if (userState.uid === docData.createdUid) {
+  //         createdGroups.push({
+  //           groupId: docData.groupId,
+  //           groupName: docData.groupName,
+  //         });
+  //       }
+  //     }
+  //   });
+  // });
+  for (const groupId of joinedGroups) {
+    const docRef = doc(db, "groups", groupId);
+    const docSnap = await getDoc(docRef);
+  }
 
   if (createdGroups.length > 0) {
     const requestsList: RequestItem[] = [];
@@ -57,7 +82,9 @@ const receiveRequests = async (props: Props) => {
       );
       requestsSnapshots.forEach((doc) => {
         const docData = doc.data();
-        const createdAt = docData.createdAt.toDate();
+        const createdAt = datetimeToString(
+          (docData.createdAt as Timestamp).toDate()
+        );
         requestsList.push({
           requestId: docData.requestId,
           requestedUid: docData.requestedUid,
@@ -79,7 +106,7 @@ const receiveRequests = async (props: Props) => {
       }
     }
 
-    props.setRequestsList(requestsList);
+    setRequestsList(requestsList);
   }
 };
 
