@@ -15,20 +15,16 @@ import { useRouter } from "next/dist/client/router";
 const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
   root: {
-    [theme.breakpoints.down("sm")]: {
-      // 幅がsmの幅(themeファイルで定義:600px)より未満の場合
-      // margin: 8,
-      // width: "calc(50% - 16px)", // 16pxはmargin分
-      margin: 16,
-      width: "calc(100% - 32px)",
-    },
-    [theme.breakpoints.up("sm")]: {
-      // 幅がsmの幅(themeファイルで定義)以上の場合
-      // margin: 16,
-      // width: "calc(33.3333% - 32px)", // 32pxはmargin分
-      margin: 8,
-      width: "calc(50% - 16px)", // 16pxはmargin分
-    },
+    // [theme.breakpoints.down("sm")]: {
+    // 幅がsmの幅(themeファイルで定義:600px)より未満の場合
+    margin: 8,
+    width: "calc(50% - 16px)", // 16pxはmargin分
+    // },
+    // [theme.breakpoints.up("sm")]: {
+    //   // 幅がsmの幅(themeファイルで定義)以上の場合
+    //   margin: 16,
+    //   width: "calc(33.3333% - 32px)", // 16pxはmargin分
+    // },
     backgroundColor: "#A8E688",
     "&:hover": {
       backgroundColor: "#88C668",

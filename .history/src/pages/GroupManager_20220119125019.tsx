@@ -12,7 +12,7 @@ const GroupManager = () => {
 
   return (
     <>
-      <BreadCrumbs lists={bc_lists} />
+      <BreadCrumbs />
 
       <ReceiveRequests />
 
