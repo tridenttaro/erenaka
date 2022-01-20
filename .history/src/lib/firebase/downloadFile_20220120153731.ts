@@ -91,7 +91,7 @@ const downloadFile = async (props: Props) => {
     // a.remove();
     // URL.revokeObjectURL(blobUrl);
 
-    // 画像の削除
+    // 画像の削除;
     try {
       const deleteResponse = await deleteObject(imageRef);
       console.log("ファイルの削除完了");

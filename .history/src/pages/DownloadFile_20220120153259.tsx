@@ -49,7 +49,7 @@ const DownloadFile: NextPage = () => {
 
   return (
     <>
-      <h2>名刺交換(受信)</h2>
+      <h2>DOWNLOAD FILE</h2>
 
       <SelectBox
         label={"アップロード先選択"}

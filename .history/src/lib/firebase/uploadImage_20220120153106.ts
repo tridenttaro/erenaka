@@ -155,13 +155,13 @@ const uploadImage = async (props: Props) => {
     }
 
     if (props.businessCardData) {
-      alert("グループへの画像のアップロードが完了しました。");
+      alert("グループ への画像のアップロードが完了しました。");
     } else {
       alert("画像のアップロードが完了しました");
     }
   } catch (error) {
     if (props.businessCardData) {
-      alert("グループへのアップロードに失敗しました。");
+      alert("グループ へのアップロードに失敗しました。");
     } else {
       alert("アップロードに失敗しました。");
     }
