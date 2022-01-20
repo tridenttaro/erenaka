@@ -8,7 +8,7 @@ import { DirectoryData, GroupData, ImageData } from "../../types/other";
 import { UploadImageToGroup } from "../../components/organisms";
 import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
-import { BreadCrumbs, ImageModal } from "../../components/molecules";
+import { BreadCrumbs } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
 import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
 import { AuthContext } from "../../components/organisms/AuthLayout";
@@ -51,7 +51,6 @@ const GroupDetail = (props: Props) => {
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
   const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
-  const [modalImageUrl, setModalImageUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const context = useContext(AuthContext);
@@ -93,9 +92,6 @@ const GroupDetail = (props: Props) => {
   const handleModalClose = useCallback(() => {
     setModalOpen(false);
   }, []);
-  const inputModalImageUrl = useCallback((url: string) => {
-    setModalImageUrl(url);
-  }, []);
 
   const inputImages = useCallback((images) => {
     setImageDataList(images);
@@ -122,12 +118,6 @@ const GroupDetail = (props: Props) => {
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
       </Suspense> */}
 
-      <ImageModal
-        open={modalOpen}
-        handleClose={handleModalClose}
-        modalImageUrl={modalImageUrl}
-      />
-
       <Suspense fallback={<CircularProgress />}>
         <ImageList
           {...{
@@ -136,8 +126,6 @@ const GroupDetail = (props: Props) => {
             imageDataList,
             inputImages,
             updateImages,
-            handleModalOpen,
-            inputModalImageUrl,
           }}
         />
       </Suspense>

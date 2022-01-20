@@ -137,7 +137,6 @@ const GroupDetail = (props: Props) => {
             inputImages,
             updateImages,
             handleModalOpen,
-            inputModalImageUrl,
           }}
         />
       </Suspense>

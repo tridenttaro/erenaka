@@ -12,7 +12,6 @@ type Props = {
   inputImages: (images: ImageData[]) => void;
   updateImages: () => void;
   handleModalOpen: () => void;
-  inputModalImageUrl: (Url: string) => void;
 };
 
 const ImageList = (props: Props) => {
@@ -23,7 +22,6 @@ const ImageList = (props: Props) => {
     inputImages,
     updateImages,
     handleModalOpen,
-    inputModalImageUrl,
   } = props;
 
   // const { data } = useSWR(
@@ -57,7 +55,6 @@ const ImageList = (props: Props) => {
               currentDirectory={currentDirectory}
               updateImages={updateImages}
               handleModalOpen={handleModalOpen}
-              inputModalImageUrl={inputModalImageUrl}
             />
           ))}
       </div>

@@ -51,7 +51,6 @@ const GroupDetail = (props: Props) => {
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
   const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
-  const [modalImageUrl, setModalImageUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const context = useContext(AuthContext);
@@ -93,9 +92,6 @@ const GroupDetail = (props: Props) => {
   const handleModalClose = useCallback(() => {
     setModalOpen(false);
   }, []);
-  const inputModalImageUrl = useCallback((url: string) => {
-    setModalImageUrl(url);
-  }, []);
 
   const inputImages = useCallback((images) => {
     setImageDataList(images);
@@ -122,11 +118,7 @@ const GroupDetail = (props: Props) => {
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
       </Suspense> */}
 
-      <ImageModal
-        open={modalOpen}
-        handleClose={handleModalClose}
-        modalImageUrl={modalImageUrl}
-      />
+      <ImageModal open={modalOpen} handleClose={handleModalClose} />
 
       <Suspense fallback={<CircularProgress />}>
         <ImageList
@@ -137,7 +129,6 @@ const GroupDetail = (props: Props) => {
             inputImages,
             updateImages,
             handleModalOpen,
-            inputModalImageUrl,
           }}
         />
       </Suspense>

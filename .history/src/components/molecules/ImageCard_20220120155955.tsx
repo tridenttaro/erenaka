@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    height: 0,
+    // height: 0,
+    objectFit: "contain",
+    height: "100px",
     paddingTop: "100%",
   },
   price: {
@@ -64,19 +66,10 @@ type Props = {
   groupId: string;
   currentDirectory: string[];
   updateImages: () => void;
-  handleModalOpen: () => void;
-  inputModalImageUrl: (Url: string) => void;
 };
 
 const ImageCard = (props: Props) => {
-  const {
-    imageData,
-    groupId,
-    currentDirectory,
-    updateImages,
-    handleModalOpen,
-    inputModalImageUrl,
-  } = props;
+  const { imageData, groupId, currentDirectory, updateImages } = props;
   const {
     imageId,
     createdAt,
@@ -88,6 +81,14 @@ const ImageCard = (props: Props) => {
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = useCallback(() => {
+    setModalOpen(true);
+  }, []);
+  const handleModalClose = useCallback(() => {
+    setModalOpen(false);
+  }, []);
 
   const handleClick = useCallback((event: any) => {
     setAnchorEl(event.currentTarget);
@@ -106,10 +107,7 @@ const ImageCard = (props: Props) => {
         image={downloadUrl}
         className={classes.media}
         title=""
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
+        onClick={() => handleModalOpen}
       />
       <CardContent className={classes.content}>
         <div

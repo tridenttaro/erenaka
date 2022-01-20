@@ -95,7 +95,7 @@ const GroupDetail = (props: Props) => {
   }, []);
   const inputModalImageUrl = useCallback((url: string) => {
     setModalImageUrl(url);
-  }, []);
+  });
 
   const inputImages = useCallback((images) => {
     setImageDataList(images);
@@ -137,7 +137,6 @@ const GroupDetail = (props: Props) => {
             inputImages,
             updateImages,
             handleModalOpen,
-            inputModalImageUrl,
           }}
         />
       </Suspense>

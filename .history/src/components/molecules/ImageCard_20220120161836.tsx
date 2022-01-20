@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    height: 0,
+    // height: 0,
+    objectFit: "contain",
+    height: "100px",
     paddingTop: "100%",
   },
   price: {
@@ -106,10 +108,9 @@ const ImageCard = (props: Props) => {
         image={downloadUrl}
         className={classes.media}
         title=""
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
+        onClick={() => inputModalImageUrl(downloadUrl)
+          handleModalOpen()
+        }
       />
       <CardContent className={classes.content}>
         <div
