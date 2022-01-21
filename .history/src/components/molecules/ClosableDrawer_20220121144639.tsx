@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import AccountCircleIcon from "@material-ui/icons/AccountCircleIcon";
 import GroupsIcon from "@material-ui/icons/Groups";
 import ArrowCircleUpIcon from "@material-ui/icons/ArrowCircleUp";
 import ArrowCircleDownIcon from "@material-ui/icons/ArrowCircleDown";
@@ -82,13 +82,6 @@ const ClosableDrawer = (props: Props) => {
   const signedInMenus = [
     {
       func: selelctMenu,
-      label: "プロフィール",
-      icon: <AccountBoxIcon />,
-      id: "Profile",
-      path: "/Profile",
-    },
-    {
-      func: selelctMenu,
       label: "グループ管理",
       icon: <GroupsIcon />,
       id: "GroupManager",
@@ -105,7 +98,7 @@ const ClosableDrawer = (props: Props) => {
       func: selelctMenu,
       label: "名刺交換(受信)",
       icon: <ArrowCircleDownIcon />,
-      id: "downTemp",
+      id: "upDown",
       path: "/DownloadFile",
     },
   ];
@@ -146,8 +139,7 @@ const ClosableDrawer = (props: Props) => {
                   <ListItemText primary={menu.label} />
                 </ListItem>
               ))}
-
-              <div className="module-spacer--small" />
+              <Divider />
 
               <ListItem
                 button

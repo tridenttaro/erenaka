@@ -146,8 +146,7 @@ const ClosableDrawer = (props: Props) => {
                   <ListItemText primary={menu.label} />
                 </ListItem>
               ))}
-
-              <div className="module-spacer--small" />
+              <Divider />
 
               <ListItem
                 button

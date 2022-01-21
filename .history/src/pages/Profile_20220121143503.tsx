@@ -5,23 +5,20 @@ import { AuthContext } from "../components/organisms/AuthLayout";
 import { BreadCrumbs } from "../components/molecules";
 import { makeStyles } from "@material-ui/core";
 import { TextDetail } from "../components/atoms";
-import { lightBlue, lightGreen } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   detail: {
     textAlign: "left",
     [theme.breakpoints.down("sm")]: {
-      margin: "20px auto 16px auto",
+      margin: "0 auto 16px auto",
       height: "auto",
-      width: "90%",
+      width: 320,
     },
     [theme.breakpoints.up("sm")]: {
-      margin: "10px auto 0 auto",
+      margin: "0 auto",
       height: "auto",
-      width: "60%",
+      width: 400,
     },
-    backgroundColor: "lightYellow",
-    wordBreak: "break-word",
   },
   price: {
     fontSize: 36,

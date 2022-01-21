@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import AccountCircleIcon from "@material-ui/icons/AccountCircleIcon";
 import GroupsIcon from "@material-ui/icons/Groups";
 import ArrowCircleUpIcon from "@material-ui/icons/ArrowCircleUp";
 import ArrowCircleDownIcon from "@material-ui/icons/ArrowCircleDown";
@@ -83,7 +83,7 @@ const ClosableDrawer = (props: Props) => {
     {
       func: selelctMenu,
       label: "プロフィール",
-      icon: <AccountBoxIcon />,
+      icon: <AccountCircleIcon />,
       id: "Profile",
       path: "/Profile",
     },
@@ -146,8 +146,7 @@ const ClosableDrawer = (props: Props) => {
                   <ListItemText primary={menu.label} />
                 </ListItem>
               ))}
-
-              <div className="module-spacer--small" />
+              <Divider />
 
               <ListItem
                 button

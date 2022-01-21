@@ -7,8 +7,9 @@ const useStyles = makeStyles({
     marginBottom: 16,
   },
   label: {
-    marginLeft: 0,
+    marginLeft: 5,
     marginRight: "auto",
+    backgroundColor: "lightGray",
   },
   value: {
     fontWeight: 600,
@@ -21,6 +22,7 @@ type Props = {
   label: string;
   value: string;
 };
+
 const TextDetail = (props: Props) => {
   const classes = useStyles();
 
