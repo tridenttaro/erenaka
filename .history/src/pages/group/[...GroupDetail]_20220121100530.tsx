@@ -12,7 +12,6 @@ import { CircularProgress } from "@material-ui/core";
 import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
 import { AuthContext } from "../../components/organisms/AuthLayout";
 import { UserState } from "../../types/auth";
-import style from "../../styles/groupdetail.module.scss";
 
 type Props = {
   groupId: string;
@@ -113,11 +112,9 @@ const GroupDetail = (props: Props) => {
       <BreadCrumbs lists={bc_lists} />
 
       {groupsInfo && (
-        <>
-          <br />
-          <p className={style.gpName}>{groupsInfo[0].groupName}</p>
-          <p className={style.gpId}> ({groupId})</p>
-        </>
+        <p>
+          {groupsInfo[0].groupName} ({groupId})
+        </p>
       )}
 
       {/* <Suspense fallback={<CircularProgress />}>

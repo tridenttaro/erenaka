@@ -114,9 +114,8 @@ const GroupDetail = (props: Props) => {
 
       {groupsInfo && (
         <>
-          <br />
           <p className={style.gpName}>{groupsInfo[0].groupName}</p>
-          <p className={style.gpId}> ({groupId})</p>
+          <p> {groupId}</p>
         </>
       )}
 
