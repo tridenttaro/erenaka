@@ -17,8 +17,8 @@ type Props = {
 const ImageList = (props: Props) => {
   const { groupId, currentDirectory, handleModalOpen, inputModalImageUrl } =
     props;
-  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
+  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
   const router = useRouter();
   const query = router?.query?.p || "1";
 

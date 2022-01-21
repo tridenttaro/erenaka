@@ -48,9 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: "100%",
-
-    // objectFit: "contain",
+    // paddingTop: "100%",
+    paddingTop: "50%",
   },
   price: {
     color: theme.palette.secondary.main,

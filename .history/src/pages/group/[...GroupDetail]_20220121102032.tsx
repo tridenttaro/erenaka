@@ -3,7 +3,9 @@ import { Suspense, useCallback, useContext, useEffect, useState } from "react";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
+import getImages from "../../lib/firebase/groups/getImages";
 import { DirectoryData, GroupData, ImageData } from "../../types/other";
+import { UploadImageToGroup } from "../../components/organisms";
 import Head from "next/head";
 import { BreadCrumbs, ImageModal } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
@@ -11,7 +13,6 @@ import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
 import { AuthContext } from "../../components/organisms/AuthLayout";
 import { UserState } from "../../types/auth";
 import style from "../../styles/groupdetail.module.scss";
-import { useRouter } from "next/dist/client/router";
 
 type Props = {
   groupId: string;
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const groupId = urlStr[0];
   const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
 
-  // const nowPage = (context?.query?.p || "1") as string;
+  const nowPage = (context?.query?.p || "1") as string;
   // 表示件数
   // const imagesCount = 0;
   // const pagesCount = Math.ceil(imagesCount / perPage);
@@ -48,6 +49,7 @@ const GroupDetail = (props: Props) => {
   const [perPage, setPerPage] = useState("25");
   const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
+  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
   const [modalImageUrl, setModalImageUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -95,6 +97,13 @@ const GroupDetail = (props: Props) => {
     setModalImageUrl(url);
   }, []);
 
+  const inputImages = useCallback((images) => {
+    setImageDataList(images);
+  }, []);
+  const updateImages = useCallback(async () => {
+    const res = await getImages({ groupId, currentDirectory, inputImages });
+  }, [groupId, currentDirectory, inputImages]);
+
   return (
     <div>
       <Head>
@@ -126,6 +135,9 @@ const GroupDetail = (props: Props) => {
           {...{
             groupId,
             currentDirectory,
+            imageDataList,
+            inputImages,
+            updateImages,
             handleModalOpen,
             inputModalImageUrl,
           }}
@@ -136,6 +148,7 @@ const GroupDetail = (props: Props) => {
       <br />
       <hr />
       <br />
+      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
     </div>
   );
 };

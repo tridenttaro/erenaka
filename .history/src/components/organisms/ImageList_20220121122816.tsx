@@ -17,8 +17,8 @@ type Props = {
 const ImageList = (props: Props) => {
   const { groupId, currentDirectory, handleModalOpen, inputModalImageUrl } =
     props;
-  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
+  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
   const router = useRouter();
   const query = router?.query?.p || "1";
 
@@ -38,15 +38,15 @@ const ImageList = (props: Props) => {
       currentDirectory,
       setImageDataList,
     });
-  }, [groupId, currentDirectory]);
+  }, [groupId, currentDirectory, setImageDataList]);
 
-  const updateImages = useCallback(() => {
-    getImages({
-      groupId,
-      currentDirectory,
-      setImageDataList,
-    });
-  }, [groupId, currentDirectory]);
+  const inputImages = useCallback((images) => {
+    setImageDataList(images);
+  }, []);
+
+  const updateImages = useCallback(async () => {
+    const res = await getImages({ groupId, currentDirectory, inputImages });
+  }, [groupId, currentDirectory, inputImages]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { ImageData } from "../../types/other";
 import ImageCard from "../molecules/ImageCard";
 import { PageButton } from "./../molecules";
@@ -10,15 +10,25 @@ import { UploadImageToGroup } from ".";
 type Props = {
   groupId: string;
   currentDirectory: string[];
+  imageDataList: ImageData[];
+  inputImages: (images: ImageData[]) => void;
+  updateImages: () => void;
   handleModalOpen: () => void;
   inputModalImageUrl: (Url: string) => void;
 };
 
 const ImageList = (props: Props) => {
-  const { groupId, currentDirectory, handleModalOpen, inputModalImageUrl } =
-    props;
-  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
+  const {
+    groupId,
+    currentDirectory,
+    imageDataList,
+    inputImages,
+    updateImages,
+    handleModalOpen,
+    inputModalImageUrl,
+  } = props;
 
+  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
   const router = useRouter();
   const query = router?.query?.p || "1";
 
@@ -36,17 +46,9 @@ const ImageList = (props: Props) => {
     getImages({
       groupId,
       currentDirectory,
-      setImageDataList,
+      inputImages,
     });
-  }, [groupId, currentDirectory]);
-
-  const updateImages = useCallback(() => {
-    getImages({
-      groupId,
-      currentDirectory,
-      setImageDataList,
-    });
-  }, [groupId, currentDirectory]);
+  }, [groupId, currentDirectory, inputImages]);
 
   return (
     <>

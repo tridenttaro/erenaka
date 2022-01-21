@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     display: "flex",
+    height: "100%",
     padding: "16px 8px",
     textAlign: "left",
     "&:last-child": {

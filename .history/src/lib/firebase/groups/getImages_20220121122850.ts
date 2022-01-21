@@ -1,4 +1,5 @@
 import { collection, doc, getDocs } from "firebase/firestore";
+import { ref } from "firebase/storage";
 import { db, storage } from "..";
 import { BusinessCardData, ImageData } from "../../../types/other";
 import datetimeToString from "../../datetimeToString";

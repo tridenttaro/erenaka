@@ -3,7 +3,9 @@ import { Suspense, useCallback, useContext, useEffect, useState } from "react";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
+import getImages from "../../lib/firebase/groups/getImages";
 import { DirectoryData, GroupData, ImageData } from "../../types/other";
+import { UploadImageToGroup } from "../../components/organisms";
 import Head from "next/head";
 import { BreadCrumbs, ImageModal } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
@@ -48,12 +50,18 @@ const GroupDetail = (props: Props) => {
   const [perPage, setPerPage] = useState("25");
   const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
+  const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
 
   const [modalImageUrl, setModalImageUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const context = useContext(AuthContext);
   const userState = context?.state as UserState;
+
+  const router = useRouter();
+  const query = router.query || "1";
+
+  console.log("query: " + JSON.stringify(query);
 
   // パンくずリスト用
   const browsePath = "/group/[...GroupDetail]";
@@ -95,6 +103,13 @@ const GroupDetail = (props: Props) => {
     setModalImageUrl(url);
   }, []);
 
+  const inputImages = useCallback((images) => {
+    setImageDataList(images);
+  }, []);
+  const updateImages = useCallback(async () => {
+    const res = await getImages({ groupId, currentDirectory, inputImages });
+  }, [groupId, currentDirectory, inputImages]);
+
   return (
     <div>
       <Head>
@@ -126,6 +141,9 @@ const GroupDetail = (props: Props) => {
           {...{
             groupId,
             currentDirectory,
+            imageDataList,
+            inputImages,
+            updateImages,
             handleModalOpen,
             inputModalImageUrl,
           }}
@@ -136,6 +154,7 @@ const GroupDetail = (props: Props) => {
       <br />
       <hr />
       <br />
+      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
     </div>
   );
 };
