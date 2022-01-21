@@ -42,15 +42,9 @@ const uploadImage = async (props: Props) => {
     }
   }
 
-  if (props.loading !== undefined && props.loading === true) {
-    console.log("連続送信をブロック");
+  if (props.loading != undefined && props.loading === true) {
     return;
-  } else if (
-    props.loading !== undefined &&
-    props.loading === false &&
-    props.setLoading
-  ) {
-    props.setLoading(true);
+  } else {
   }
 
   const { image, groupId, currentDirectory, userState } = props;
@@ -174,19 +168,11 @@ const uploadImage = async (props: Props) => {
     } else {
       alert("画像のアップロードが完了しました");
     }
-
-    if (props.setLoading) {
-      props.setLoading(false);
-    }
   } catch (error) {
     if (props.businessCardData) {
       alert("グループへのアップロードに失敗しました。");
     } else {
       alert("アップロードに失敗しました。");
-    }
-
-    if (props.setLoading) {
-      props.setLoading(false);
     }
   }
 };

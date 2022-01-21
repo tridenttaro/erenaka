@@ -108,17 +108,15 @@ const downloadFile = async (props: Props) => {
     // URL.revokeObjectURL(blobUrl);
 
     // 画像の削除
-    const deleteResponse = await deleteObject(imageRef);
-
-    if (props.setLoading) {
-      props.setLoading(false);
+    try {
+      const deleteResponse = await deleteObject(imageRef);
+      console.log("ファイルの削除完了");
+    } catch (error) {
+      console.error("ファイルの削除失敗！", error);
     }
   } catch (e) {
-    alert("ファイルの取得に失敗しました。");
-
-    if (props.setLoading) {
-      props.setLoading(false);
-    }
+    window.alert("ファイルの取得に失敗しました。");
+    console.error(e);
   }
 };
 

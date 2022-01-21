@@ -64,7 +64,6 @@ const UploadImageToGroup = (props: Props) => {
     userState,
     businessCardData,
     updateImages,
-    loading,
   ]);
 
   // 名刺情報用

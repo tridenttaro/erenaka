@@ -52,7 +52,7 @@ const DownloadFile: NextPage = () => {
       loading,
       setLoading,
     });
-  }, [downloadKey, userState, selectedGroup, loading]);
+  }, [downloadKey, userState, selectedGroup]);
 
   return (
     <>

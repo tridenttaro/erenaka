@@ -42,11 +42,10 @@ const uploadImage = async (props: Props) => {
     }
   }
 
-  if (props.loading !== undefined && props.loading === true) {
-    console.log("連続送信をブロック");
+  if (props.loading != undefined && props.loading === true) {
     return;
   } else if (
-    props.loading !== undefined &&
+    props.loading != undefined &&
     props.loading === false &&
     props.setLoading
   ) {

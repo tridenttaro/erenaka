@@ -10,7 +10,9 @@ import { AuthContext } from "./AuthLayout";
 import uploadImage from "../../lib/firebase/uploadImage";
 import { UserState } from "../../types/auth";
 import { PrimaryButton, TextInput } from "../atoms";
+import groupStyles from "../../styles/group.module.scss";
 import { BusinessCardData } from "../../types/other";
+import getLastData from "../../lib/firebase/getLastData";
 
 type Props = {
   groupId: string;
@@ -54,8 +56,6 @@ const UploadImageToGroup = (props: Props) => {
       businessCardData,
       setBusinessCardData,
       updateImages,
-      loading,
-      setLoading,
     });
   }, [
     image,
@@ -64,7 +64,6 @@ const UploadImageToGroup = (props: Props) => {
     userState,
     businessCardData,
     updateImages,
-    loading,
   ]);
 
   // 名刺情報用

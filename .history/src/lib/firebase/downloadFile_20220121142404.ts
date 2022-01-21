@@ -108,6 +108,7 @@ const downloadFile = async (props: Props) => {
     // URL.revokeObjectURL(blobUrl);
 
     // 画像の削除
+
     const deleteResponse = await deleteObject(imageRef);
 
     if (props.setLoading) {

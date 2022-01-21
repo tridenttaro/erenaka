@@ -21,23 +21,10 @@ type Props = {
 
 const downloadFile = async (props: Props) => {
   if (!props.userState || !props.selectedGroupId || !props.downloadKey) {
-    alert("ダウンロードキー、保存先グループを選択してください");
+    alert("エラー\nダウンロードキー、保存先グループを選択してください");
     return;
   }
-
-  if (props.loading !== undefined && props.loading === true) {
-    console.log("連続送信をブロック");
-    return;
-  } else if (
-    props.loading !== undefined &&
-    props.loading === false &&
-    props.setLoading
-  ) {
-    props.setLoading(true);
-  }
-
   const { downloadKey, userState, selectedGroupId } = props;
-
   if (downloadKey === "" || isNaN(parseInt(downloadKey, 10))) {
     return;
   } else {
@@ -108,17 +95,15 @@ const downloadFile = async (props: Props) => {
     // URL.revokeObjectURL(blobUrl);
 
     // 画像の削除
-    const deleteResponse = await deleteObject(imageRef);
-
-    if (props.setLoading) {
-      props.setLoading(false);
+    try {
+      const deleteResponse = await deleteObject(imageRef);
+      console.log("ファイルの削除完了");
+    } catch (error) {
+      console.error("ファイルの削除失敗！", error);
     }
   } catch (e) {
-    alert("ファイルの取得に失敗しました。");
-
-    if (props.setLoading) {
-      props.setLoading(false);
-    }
+    window.alert("ファイルの取得に失敗しました。");
+    console.error(e);
   }
 };
 
