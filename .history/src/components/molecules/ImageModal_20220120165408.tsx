@@ -62,12 +62,13 @@ const ImageModal = (props: Props) => {
         <Box className={classes.box}>
           {/* <Typography>{props.modalImageUrl}</Typography> */}
           {/* <CardMedia image={props.modalImageUrl} className={classes.media} /> */}
-          <div style={{ height: "100%", width: "100%", position: "relative" }}>
+          <div style={{ height: "100%", width: "100%" }}>
             <Image
               src={props.modalImageUrl}
               alt="名刺画像"
-              layout="fill"
-              objectFit="contain"
+              layout="fixed"
+              height={"100%"}
+              width={"100%"}
             />
           </div>
         </Box>

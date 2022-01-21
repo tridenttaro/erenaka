@@ -6,6 +6,7 @@ import getDirectories from "../../lib/firebase/groups/getDirectories";
 import getImages from "../../lib/firebase/groups/getImages";
 import { DirectoryData, GroupData, ImageData } from "../../types/other";
 import { UploadImageToGroup } from "../../components/organisms";
+import layout from "../../styles/layout.module.scss";
 import Head from "next/head";
 import { BreadCrumbs, ImageModal } from "../../components/molecules";
 import { CircularProgress } from "@material-ui/core";
@@ -104,7 +105,7 @@ const GroupDetail = (props: Props) => {
   }, [groupId, currentDirectory, inputImages]);
 
   return (
-    <div>
+    <div className={layout.page}>
       <Head>
         <title>電子名刺 | 名刺一覧</title>
       </Head>
