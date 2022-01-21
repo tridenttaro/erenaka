@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    height: 0,
+    height: 100%,
     paddingTop: "100%",
 
     // objectFit: "contain",
@@ -114,13 +114,7 @@ const ImageCard = (props: Props) => {
           handleModalOpen();
         }}
       /> */}
-      <div
-        style={{ height: "100px", width: "100%", position: "relative" }}
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
-      >
+      <div className={classes.media}>
         <Image
           src={downloadUrl}
           alt="名刺画像"

@@ -115,11 +115,7 @@ const ImageCard = (props: Props) => {
         }}
       /> */}
       <div
-        style={{ height: "100px", width: "100%", position: "relative" }}
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
+        style={{ maxHeight: "100%", maxWidth: "100%", position: "relative" }}
       >
         <Image
           src={downloadUrl}

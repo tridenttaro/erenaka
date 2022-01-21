@@ -12,6 +12,10 @@ const Home: NextPage = () => {
   const context = useContext(AuthContext);
   const signedOut = context?.signedOut as SignedOut;
 
+  //
+  const browsePath = "/group/[...GroupDetail]";
+  let truePath = "/group/ADuCNKOgb7dWJ0gpYRwv";
+
   return (
     <div>
       <Head>
@@ -21,7 +25,7 @@ const Home: NextPage = () => {
       <BreadCrumbs />
 
       <div>
-        <h2 className={layout.center}>エレナカ</h2>
+        <h2 className={layout.center}>エレナカ(電子名刺)</h2>
 
         <JoinedGroups />
 

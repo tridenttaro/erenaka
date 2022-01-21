@@ -60,7 +60,7 @@ const DownloadFile: NextPage = () => {
         <title>電子名刺 | 名刺交換・受信</title>
       </Head>
 
-      <h2>名刺交換・受信</h2>
+      <h2>名刺交換(受信)</h2>
 
       <SelectBox
         label={"アップロード先選択"}

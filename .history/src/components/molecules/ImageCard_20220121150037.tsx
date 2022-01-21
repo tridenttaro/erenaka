@@ -105,7 +105,7 @@ const ImageCard = (props: Props) => {
 
   return (
     <Card className={classes.root}>
-      {/* <CardMedia
+      <CardMedia
         image={downloadUrl}
         className={classes.media}
         title=""
@@ -113,14 +113,8 @@ const ImageCard = (props: Props) => {
           inputModalImageUrl(downloadUrl);
           handleModalOpen();
         }}
-      /> */}
-      <div
-        style={{ height: "100px", width: "100%", position: "relative" }}
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
-      >
+      />
+      <div>
         <Image
           src={downloadUrl}
           alt="名刺画像"

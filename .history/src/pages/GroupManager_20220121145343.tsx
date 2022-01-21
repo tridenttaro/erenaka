@@ -16,7 +16,7 @@ const GroupManager = () => {
   return (
     <>
       <Head>
-        <title>電子名刺 | グループ管理</title>
+        <title>電子名刺 | トップページ(グループ選択)</title>
       </Head>
 
       <BreadCrumbs lists={bc_lists} />

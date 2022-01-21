@@ -114,13 +114,7 @@ const ImageCard = (props: Props) => {
           handleModalOpen();
         }}
       /> */}
-      <div
-        style={{ height: "100px", width: "100%", position: "relative" }}
-        onClick={() => {
-          inputModalImageUrl(downloadUrl);
-          handleModalOpen();
-        }}
-      >
+      <div style={{ height: "100px", width: "100%", position: "relative" }}>
         <Image
           src={downloadUrl}
           alt="名刺画像"

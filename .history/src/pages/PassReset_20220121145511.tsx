@@ -24,7 +24,6 @@ const PassReset = () => {
       <Head>
         <title>電子名刺 | パスワードリセット</title>
       </Head>
-
       <h2 className="u-text__headline u-text-center">パスワードリセット</h2>
       <div className="module-spacer--medium" />
 
