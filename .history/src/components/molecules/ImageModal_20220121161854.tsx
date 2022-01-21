@@ -52,6 +52,7 @@ const ImageModal = (props: Props) => {
 
   return (
     <div>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={props.open}
         onClose={props.handleClose}

@@ -1,0 +1,24 @@
+.box {
+  position: "absolute";
+  top: "50%";
+  left: "50%";
+  transform: "translate(-50%, -50%)";
+  height: "80%";
+  width: "70%";
+  background-color: "white";
+  border: "2px solid #000";
+  object-fit: "contain";
+  // boxShadow: 24,
+  // p: 4,
+}
+
+.media {
+  height: "100%";
+  object-fit: "contain";
+}
+
+.image {
+  height: "100%";
+  width: "100%";
+  position: "relative";
+}

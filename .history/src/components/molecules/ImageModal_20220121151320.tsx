@@ -52,15 +52,15 @@ const ImageModal = (props: Props) => {
 
   return (
     <div>
+      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         open={props.open}
         onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className={classes.box}>
-          {/* <Box className={styles.box}> */}
-
+        {/* <Box className={classes.box}> */}
+        <Box className={styles.box}>
           {/* <Typography>{props.modalImageUrl}</Typography> */}
           {/* <CardMedia image={props.modalImageUrl} className={classes.media} /> */}
           {/* <div style={{ height: "100%", width: "100%", position: "relative" }}> */}

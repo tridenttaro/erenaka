@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/components/molecules/breadcrumbs.module.scss";
+import styles from "../../styles/components/breadcrumbs.module.scss";
 
 type Props = {
   lists?: {
