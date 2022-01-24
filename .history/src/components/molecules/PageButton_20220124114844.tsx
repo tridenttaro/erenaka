@@ -1,10 +1,18 @@
 import MuiPagination from "@material-ui/lab/Pagination";
 import { withStyles } from "@material-ui/styles";
+import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 
 const PageButton = (props) => {
   //ページ番号
   const [page, setPage] = useState(1);
+
+  // const router = useRouter()
+  // let queryPage = router?.query?.p ? parseInt(router.query.p as string) : 1;
+  // const pagesCount = Math.ceil(allImagesCount / perPage);
+  // if (queryPage < 1 || queryPage > pagesCount) {
+  //   queryPage = 1;
+  // }
 
   const Pagination = withStyles({
     root: {

@@ -1,10 +1,17 @@
 import MuiPagination from "@material-ui/lab/Pagination";
 import { withStyles } from "@material-ui/styles";
-import { useState } from "react";
+import { useRouter } from "next/dist/client/router";
+import { useEffect, useState } from "react";
 
-const PageButton = (props) => {
+type Props = {
+  pagesCount: number;
+  onChange: (page: number) => void;
+  page: number;
+};
+
+const PageButton = (props: Props) => {
   //ページ番号
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(props.page);
 
   const Pagination = withStyles({
     root: {

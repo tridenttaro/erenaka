@@ -90,7 +90,7 @@ const ImageList = (props: Props) => {
   }, [upMenuOpen]);
 
   console.log("page: " + page);
-  console.log(router.query.p);
+  console.log(router.query);
 
   return (
     <>
