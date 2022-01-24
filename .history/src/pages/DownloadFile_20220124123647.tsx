@@ -69,13 +69,12 @@ const DownloadFile: NextPage = () => {
       <h2>名刺交換・受信</h2>
 
       <SelectBox
-        label={"アップロード先"}
+        label={"アップロード先選択"}
         required={true}
         options={joinedGroupsInfo}
         select={setSelectedGroup}
         value={selectedGroup}
       />
-
       <br />
 
       <TextInput

@@ -10,9 +10,8 @@ import { CircularProgress } from "@material-ui/core";
 import getGroupsInfo from "../../lib/firebase/groups/getGroupsInfo";
 import { AuthContext } from "../../components/organisms/AuthLayout";
 import { UserState } from "../../types/auth";
-import styles from "../../styles/groupdetail.module.scss";
+import style from "../../styles/groupdetail.module.scss";
 import { useRouter } from "next/dist/client/router";
-import { SelectBox } from "../../components/atoms";
 
 type Props = {
   groupId: string;
@@ -73,12 +72,6 @@ const GroupDetail = (props: Props) => {
     bc_lists.push(...cdItem);
   }
 
-  // 表示件数リスト
-  const perPageList = [
-    { id: "25", name: "25" },
-    { id: "50", name: "50" },
-  ];
-
   useEffect(() => {
     getGroupsInfo({ joinedGroupsId: [groupId], setGroupsInfo });
   }, [groupId]);
@@ -113,20 +106,10 @@ const GroupDetail = (props: Props) => {
       {groupsInfo && (
         <>
           <br />
-          <p className={styles.gpName}>{groupsInfo[0].groupName}</p>
-          <p className={styles.gpId}> ({groupId})</p>
+          <p className={style.gpName}>{groupsInfo[0].groupName}</p>
+          <p className={style.gpId}> ({groupId})</p>
         </>
       )}
-
-      <div className={styles.perPageSelect}>
-        <SelectBox
-          label={"表示件数"}
-          required={true}
-          options={perPageList}
-          select={setPerPage}
-          value={perPage.toString()}
-        />
-      </div>
 
       {/* <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />

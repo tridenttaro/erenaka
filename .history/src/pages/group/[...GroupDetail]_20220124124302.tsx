@@ -118,15 +118,13 @@ const GroupDetail = (props: Props) => {
         </>
       )}
 
-      <div className={styles.perPageSelect}>
-        <SelectBox
-          label={"表示件数"}
-          required={true}
-          options={perPageList}
-          select={setPerPage}
-          value={perPage.toString()}
-        />
-      </div>
+      <SelectBox
+        label={"表示件数"}
+        required={true}
+        options={perPageList}
+        select={setPerPage}
+        value={perPage.toString()}
+      />
 
       {/* <Suspense fallback={<CircularProgress />}>
         <DirectoryList {...{ groupId, currentDirectory, directories }} />
