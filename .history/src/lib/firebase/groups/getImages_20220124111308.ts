@@ -37,7 +37,7 @@ const getImages = async (props: Props) => {
     storeRef = collection(db, "groups", groupId, ...cdStr);
   }
 
-  const q1 = query(storeRef, orderBy("createdAt", "desc"));
+  const q1 = query(storeRef, orderBy("updated_at", "desc"));
 
   try {
     // const snapshots = await getDocs(storeRef);

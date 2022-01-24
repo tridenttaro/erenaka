@@ -64,16 +64,6 @@ const ImageList = (props: Props) => {
     });
   }, [groupId, currentDirectory, page, perPage]);
 
-  const changePage = useCallback(
-    (selectedPage) => {
-      router.push(
-        `/group/[...GroupDetail]?p=${selectedPage}`,
-        `/group/${groupId}?p=${selectedPage}`
-      );
-    },
-    [router, groupId]
-  );
-
   const updateImages = useCallback(() => {
     getImages({
       groupId,
@@ -89,8 +79,7 @@ const ImageList = (props: Props) => {
     setUpMenuOpen(!upMenuOpen);
   }, [upMenuOpen]);
 
-  console.log("page: " + page);
-  console.log(router.query);
+  console.log("counts: " + allImagesCount);
 
   return (
     <>
@@ -112,9 +101,7 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
-      <PageButton pagesCount={pagesCount} onChange={changePage} />
+      <PageButton pagesCount={pagesCount} onChange={updateImages} />
 
       <div className="module-spacer--small" />
 

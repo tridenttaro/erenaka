@@ -112,8 +112,6 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
       <PageButton pagesCount={pagesCount} onChange={changePage} />
 
       <div className="module-spacer--small" />

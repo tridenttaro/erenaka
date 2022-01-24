@@ -67,7 +67,7 @@ const ImageList = (props: Props) => {
   const changePage = useCallback(
     (selectedPage) => {
       router.push(
-        `/group/[...GroupDetail]?p=${selectedPage}`,
+        "/group/[...GroupDetail]",
         `/group/${groupId}?p=${selectedPage}`
       );
     },
@@ -89,9 +89,6 @@ const ImageList = (props: Props) => {
     setUpMenuOpen(!upMenuOpen);
   }, [upMenuOpen]);
 
-  console.log("page: " + page);
-  console.log(router.query);
-
   return (
     <>
       <section className="c-section-wrapin">
@@ -111,8 +108,6 @@ const ImageList = (props: Props) => {
             ))}
         </div>
       </section>
-
-      <div className="module-spacer--small" />
 
       <PageButton pagesCount={pagesCount} onChange={changePage} />
 

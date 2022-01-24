@@ -9,19 +9,10 @@ type Props = {
   setImageDataList: (images: ImageData[]) => void;
   page: number;
   perPage: number;
-  setAllImagesCount: (count: number) => void;
 };
 
 const getImages = async (props: Props) => {
-  const {
-    groupId,
-    currentDirectory,
-    setImageDataList,
-    page,
-    perPage,
-    setAllImagesCount,
-  } = props;
-
+  const { groupId, currentDirectory, setImageDataList, page, perPage } = props;
   const imageDataList: ImageData[] = [];
 
   let storeRef = collection(db, "groups", groupId, "images");
@@ -37,7 +28,7 @@ const getImages = async (props: Props) => {
     storeRef = collection(db, "groups", groupId, ...cdStr);
   }
 
-  const q1 = query(storeRef, orderBy("createdAt", "desc"));
+  const q1 = query(storeRef, orderBy("updated_at", "desc"));
 
   try {
     // const snapshots = await getDocs(storeRef);
@@ -100,9 +91,6 @@ const getImages = async (props: Props) => {
       });
     }
 
-    setAllImagesCount(index);
-
-    // ページング実装前のコード
     // snapshots.forEach((doc) => {
     //   const docData = doc.data();
     //   const {

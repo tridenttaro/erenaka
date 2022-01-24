@@ -13,26 +13,19 @@ type Props = {
   currentDirectory: string[];
   handleModalOpen: () => void;
   inputModalImageUrl: (Url: string) => void;
-  perPage: number;
+  perPage: string;
 };
 
 const ImageList = (props: Props) => {
-  const {
-    groupId,
-    currentDirectory,
-    handleModalOpen,
-    inputModalImageUrl,
-    perPage,
-  } = props;
+  const { groupId, currentDirectory, handleModalOpen, inputModalImageUrl } =
+    props;
   const [imageDataList, setImageDataList] = useState<ImageData[]>([]);
-  const [allImagesCount, setAllImagesCount] = useState(0);
   const [upMenuOpen, setUpMenuOpen] = useState(false);
 
   const router = useRouter();
-
-  let page = router?.query?.p ? parseInt(router.query.p as string) : 1;
-  const pagesCount = Math.ceil(allImagesCount / perPage);
+  let nowPage = router?.query?.p || "1";
   if (page < 1 || page > pagesCount) {
+    // 変更余地あり
     page = 1;
   }
 
@@ -58,39 +51,20 @@ const ImageList = (props: Props) => {
       groupId,
       currentDirectory,
       setImageDataList,
-      page,
-      perPage,
-      setAllImagesCount,
     });
-  }, [groupId, currentDirectory, page, perPage]);
-
-  const changePage = useCallback(
-    (selectedPage) => {
-      router.push(
-        `/group/[...GroupDetail]?p=${selectedPage}`,
-        `/group/${groupId}?p=${selectedPage}`
-      );
-    },
-    [router, groupId]
-  );
+  }, [groupId, currentDirectory]);
 
   const updateImages = useCallback(() => {
     getImages({
       groupId,
       currentDirectory,
       setImageDataList,
-      page,
-      perPage,
-      setAllImagesCount,
     });
-  }, [groupId, currentDirectory, page, perPage]);
+  }, [groupId, currentDirectory]);
 
   const handleMenu = useCallback(() => {
     setUpMenuOpen(!upMenuOpen);
   }, [upMenuOpen]);
-
-  console.log("page: " + page);
-  console.log(router.query);
 
   return (
     <>
@@ -112,9 +86,7 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
-      <PageButton pagesCount={pagesCount} onChange={changePage} />
+      <PageButton pagesCount={pagesCount} />
 
       <div className="module-spacer--small" />
 

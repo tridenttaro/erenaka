@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const GroupDetail = (props: Props) => {
   const { groupId, currentDirectory } = props;
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(25);
   const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
 
