@@ -19,7 +19,7 @@ type Props = {
   options: { id: string; name: string }[];
   select: (e: any) => void;
 
-  // groupListFlag?: boolean;
+  groupListFlag?: boolean;
 };
 
 const SelectBox = (props: Props) => {

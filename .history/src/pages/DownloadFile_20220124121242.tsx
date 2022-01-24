@@ -26,7 +26,7 @@ const DownloadFile: NextPage = () => {
 
   useEffect(() => {
     (async () => {
-      await getGroupsInfo({
+      getGroupsInfo({
         joinedGroupsId,
         setJoinedGroupsInfo,
       });

@@ -26,14 +26,11 @@ const DownloadFile: NextPage = () => {
 
   useEffect(() => {
     (async () => {
-      await getGroupsInfo({
+      getGroupsInfo({
         joinedGroupsId,
         setJoinedGroupsInfo,
       });
-      setJoinedGroupsInfo((prevState) => [
-        ...prevState,
-        { id: "download", name: "端末にダウンロード" },
-      ]);
+      setJoinedGroupsInfo((prevState) => [...prevState, {"download", "端末にダウンロード"}])
     })();
   }, [joinedGroupsId]);
 

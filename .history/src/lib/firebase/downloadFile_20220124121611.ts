@@ -100,16 +100,17 @@ const downloadFile = async (props: Props) => {
       });
     } else {
       // ダウンロードを選択
-      // 取得した画像のダウンロード処理
-      const blobUrl = URL.createObjectURL(response);
-      const a = document.createElement("a");
-      document.body.appendChild(a);
-      a.download = fileName;
-      a.href = blobUrl;
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(blobUrl);
     }
+
+    // // 取得した画像のダウンロード処理
+    // const blobUrl = URL.createObjectURL(response);
+    // const a = document.createElement("a");
+    // document.body.appendChild(a);
+    // a.download = fileName;
+    // a.href = blobUrl;
+    // a.click();
+    // a.remove();
+    // URL.revokeObjectURL(blobUrl);
 
     // 画像の削除
     const deleteResponse = await deleteObject(imageRef);
