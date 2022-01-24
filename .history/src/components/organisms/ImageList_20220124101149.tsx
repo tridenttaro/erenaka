@@ -6,7 +6,6 @@ import useSWR from "swr";
 import getImages from "../../lib/firebase/groups/getImages";
 import { useRouter } from "next/dist/client/router";
 import { UploadImageToGroup } from ".";
-import styles from "../../styles/components/organisms/imagelist.module.scss";
 
 type Props = {
   groupId: string;
@@ -23,13 +22,6 @@ const ImageList = (props: Props) => {
 
   const router = useRouter();
   const query = router?.query?.p || "1";
-
-  const menuClass = upMenuOpen
-    ? `${styles.menuWrapperOpen}`
-    : `${styles.menuWrapperClose}`;
-  const handleMenuButtonText = upMenuOpen
-    ? "画像アップロードメニューを閉じる"
-    : "画像アップロードメニューを展開▽";
 
   // const { data } = useSWR(
   //   "imageDataList",
@@ -59,7 +51,7 @@ const ImageList = (props: Props) => {
 
   const handleMenu = useCallback(() => {
     setUpMenuOpen(!upMenuOpen);
-  }, [upMenuOpen]);
+  }, []);
 
   return (
     <>
@@ -81,14 +73,10 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
-      <p className={styles.handleMenuButton} onClick={() => handleMenu()}>
-        {handleMenuButtonText}
-      </p>
-      <div className={menuClass}>
-        <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
-      </div>
+      {/* <a>画像をアップロード（展開）</a> */}
+      {/* <div style={{display: ()}}> */}
+      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
+      {/* </div> */}
     </>
   );
 };

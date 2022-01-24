@@ -6,7 +6,7 @@ import useSWR from "swr";
 import getImages from "../../lib/firebase/groups/getImages";
 import { useRouter } from "next/dist/client/router";
 import { UploadImageToGroup } from ".";
-import styles from "../../styles/components/organisms/imagelist.module.scss";
+import styles from "../../styles/components/organisms/imagelist.modules.scss";
 
 type Props = {
   groupId: string;
@@ -27,9 +27,6 @@ const ImageList = (props: Props) => {
   const menuClass = upMenuOpen
     ? `${styles.menuWrapperOpen}`
     : `${styles.menuWrapperClose}`;
-  const handleMenuButtonText = upMenuOpen
-    ? "画像アップロードメニューを閉じる"
-    : "画像アップロードメニューを展開▽";
 
   // const { data } = useSWR(
   //   "imageDataList",
@@ -81,11 +78,7 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
-      <p className={styles.handleMenuButton} onClick={() => handleMenu()}>
-        {handleMenuButtonText}
-      </p>
+      <a onClick={() => handleMenu()}>画像をアップロード（展開）</a>
       <div className={menuClass}>
         <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
       </div>

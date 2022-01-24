@@ -29,7 +29,7 @@ const ImageList = (props: Props) => {
     : `${styles.menuWrapperClose}`;
   const handleMenuButtonText = upMenuOpen
     ? "画像アップロードメニューを閉じる"
-    : "画像アップロードメニューを展開▽";
+    : "画像アップロードメニューを展開";
 
   // const { data } = useSWR(
   //   "imageDataList",

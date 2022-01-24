@@ -27,10 +27,6 @@ const ImageList = (props: Props) => {
   const menuClass = upMenuOpen
     ? `${styles.menuWrapperOpen}`
     : `${styles.menuWrapperClose}`;
-  const handleMenuButtonText = upMenuOpen
-    ? "画像アップロードメニューを閉じる"
-    : "画像アップロードメニューを展開▽";
-
   // const { data } = useSWR(
   //   "imageDataList",
   //   () =>
@@ -81,14 +77,10 @@ const ImageList = (props: Props) => {
         </div>
       </section>
 
-      <div className="module-spacer--small" />
-
-      <p className={styles.handleMenuButton} onClick={() => handleMenu()}>
-        {handleMenuButtonText}
-      </p>
-      <div className={menuClass}>
-        <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
-      </div>
+      <a onClick={() => handleMenu()}>画像をアップロード（展開）</a>
+      {/* <div style={{display: ()}}> */}
+      <UploadImageToGroup {...{ groupId, currentDirectory, updateImages }} />
+      {/* </div> */}
     </>
   );
 };
