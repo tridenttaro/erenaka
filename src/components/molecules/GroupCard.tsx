@@ -33,12 +33,16 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     display: "flex",
+    width: "100%",
     padding: "16px 8px",
     textAlign: "left",
     "&:last-child": {
       // 疑似要素(Scss似)
       paddingBottom: 16,
     },
+  },
+  contentText: {
+    width: "100%",
   },
   media: {
     height: 0,
@@ -73,6 +77,7 @@ const GroupCard = (props: Props) => {
     <Card className={classes.root}>
       <CardContent className={classes.content}>
         <div
+          className={classes.contentText}
           onClick={() =>
             router.push("/group/[...GroupDetail]", `/group/${props.groupId}`)
           }
