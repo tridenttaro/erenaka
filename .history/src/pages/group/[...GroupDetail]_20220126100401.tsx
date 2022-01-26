@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const GroupDetail = (props: Props) => {
   const { groupId, currentDirectory } = props;
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(20);
   const [groupsInfo, setGroupsInfo] = useState<GroupData[]>();
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
 
@@ -75,8 +75,8 @@ const GroupDetail = (props: Props) => {
 
   // 表示件数リスト
   const perPageList = [
-    { id: "10", name: "10" },
-    { id: "30", name: "30" },
+    { id: "5", name: "5" },
+    { id: "25", name: "25" },
     { id: "50", name: "50" },
   ];
 

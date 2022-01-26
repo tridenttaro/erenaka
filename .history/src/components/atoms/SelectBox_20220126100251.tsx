@@ -32,7 +32,7 @@ const SelectBox = (props: Props) => {
       <Select
         required={required}
         value={value}
-        defaultValue={value}
+        defaultValue={{ id: "5", name: "5" }}
         onChange={(event) => select(event.target.value)}
       >
         {options.map((option) => (

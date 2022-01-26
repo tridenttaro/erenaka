@@ -17,7 +17,7 @@ type Props = {
   value: string;
   options: { id: string; name: string }[];
   select: (e: any) => void;
-  defaultValue?: { id: string; name: string };
+  defaultChecked?: { id: string; name: string };
   // groupListFlag?: boolean;
 };
 
@@ -32,8 +32,9 @@ const SelectBox = (props: Props) => {
       <Select
         required={required}
         value={value}
-        defaultValue={value}
+        defaultValue=""
         onChange={(event) => select(event.target.value)}
+        defaultChecked
       >
         {options.map((option) => (
           <MenuItem key={option.id} value={option.id}>
