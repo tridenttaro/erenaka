@@ -1,0 +1,32 @@
+.gpInfo {
+  overflow-wrap: break-word;
+
+  .gpName {
+    padding-top: 5px;
+    font-size: 30px;
+    font-weight: bold;
+    display: inline;
+  }
+  .gpId {
+    display: inline;
+  }
+}
+
+.perPageSelect {
+  width: 100px;
+  margin-left: auto;
+  margin-right: 10%;
+}
+
+.handleMenuButton {
+  color: blue;
+  // font-weight: bold;
+  text-decoration: underline;
+}
+.menuWrapperOpen {
+  display: block;
+  background-color: gray;
+}
+.menuWrapperClose {
+  display: none;
+}
