@@ -43,12 +43,19 @@ const GroupDetail = () => {
   // useMemoでレンダリング時も更新されない
   const { groupId, currentDirectory } = useMemo(() => {
     const queryStr = router.query?.GroupDetail;
+
     const groupId = queryStr ? queryStr[0] : "";
     const currentDirectory = (
       queryStr && queryStr.length > 1 ? queryStr.slice(1) : []
     ) as string[];
+
     return { groupId, currentDirectory };
   }, [router]);
+
+  // console.log(`GroupId: ${groupId} __cd: ${JSON.stringify(currentDirectory)}`);
+  // console.log(
+  //   `GroupId1: ${groupId1} __cd1: ${JSON.stringify(currentDirectory1)}`
+  // );
 
   // // フォルダの多重作成を禁止(1階層まで)
   // if (currentDirectory.length > 1) setUrlError(true);

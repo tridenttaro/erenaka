@@ -38,9 +38,7 @@ const listenAuthState = (props: Props) => {
         props.setLoading(false);
       }
     });
-  } catch (error) {
-    props.setLoading(false);
-  }
+  } catch (error) {}
 };
 
 export default listenAuthState;

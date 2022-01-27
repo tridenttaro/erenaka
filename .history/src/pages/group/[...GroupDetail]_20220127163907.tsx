@@ -50,6 +50,11 @@ const GroupDetail = () => {
     return { groupId, currentDirectory };
   }, [router]);
 
+  // console.log(`GroupId: ${groupId} __cd: ${JSON.stringify(currentDirectory)}`);
+  // console.log(
+  //   `GroupId1: ${groupId1} __cd1: ${JSON.stringify(currentDirectory1)}`
+  // );
+
   // // フォルダの多重作成を禁止(1階層まで)
   // if (currentDirectory.length > 1) setUrlError(true);
 

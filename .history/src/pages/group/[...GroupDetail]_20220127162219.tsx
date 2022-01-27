@@ -1,12 +1,5 @@
 import { GetServerSideProps } from "next";
-import {
-  Suspense,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Suspense, useCallback, useContext, useEffect, useState } from "react";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
@@ -21,7 +14,31 @@ import styles from "../../styles/groupdetail.module.scss";
 import { useRouter } from "next/dist/client/router";
 import { SelectBox } from "../../components/atoms";
 
+// type Props = {
+//   groupId: string;
+//   currentDirectory: string[];
+// };
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const urlStr = (context?.params?.GroupDetail || []) as string[];
+//   const groupId = urlStr[0];
+//   const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
+
+//   const props: Props = {
+//     groupId: groupId,
+//     currentDirectory: currentDirectory,
+//   };
+
+//   return { props };
+// };
+
+// const GroupDetail = (props: Props) => {
 const GroupDetail = () => {
+  // const { groupId, currentDirectory } = props;
+
+  const [groupId, setGroupId] = useState<string>();
+  const [currentDirectory, setCurrentDirectory] = useState<string[]>([]);
+
   const [urlError, setUrlError] = useState(false);
   const [groupLoading, setGroupLoading] = useState(true);
 
@@ -40,18 +57,24 @@ const GroupDetail = () => {
 
   const router = useRouter();
 
-  // useMemoでレンダリング時も更新されない
-  const { groupId, currentDirectory } = useMemo(() => {
-    const queryStr = router.query?.GroupDetail;
-    const groupId = queryStr ? queryStr[0] : "";
-    const currentDirectory = (
-      queryStr && queryStr.length > 1 ? queryStr.slice(1) : []
-    ) as string[];
-    return { groupId, currentDirectory };
-  }, [router]);
+  // console.log(`GroupId: ${groupId} __cd: ${JSON.stringify(currentDirectory)}`);
+  // console.log(
+  //   `GroupId1: ${groupId1} __cd1: ${JSON.stringify(currentDirectory1)}`
+  // );
 
   // // フォルダの多重作成を禁止(1階層まで)
   // if (currentDirectory.length > 1) setUrlError(true);
+  useEffect(() => {
+    const queryStr = router.query?.GroupDetail;
+    const gId = queryStr ? queryStr[0] : "";
+    setGroupId(gId);
+    const cd = (
+      queryStr && queryStr.length > 1 ? queryStr.slice(1) : []
+    ) as string[];
+    setCurrentDirectory(cd);
+
+    console.log(`gid: ${gId} _cd: ${JSON.stringify(cd)}`);
+  }, [router]);
 
   // パンくずリスト用
   const browsePath = "/group/[...GroupDetail]";

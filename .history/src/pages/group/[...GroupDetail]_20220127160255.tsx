@@ -1,12 +1,5 @@
 import { GetServerSideProps } from "next";
-import {
-  Suspense,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Suspense, useCallback, useContext, useEffect, useState } from "react";
 import { DirectoryList, ImageList } from "../../components/organisms";
 import CreateDirectory from "../../components/organisms/CreateDirectory";
 import getDirectories from "../../lib/firebase/groups/getDirectories";
@@ -21,7 +14,26 @@ import styles from "../../styles/groupdetail.module.scss";
 import { useRouter } from "next/dist/client/router";
 import { SelectBox } from "../../components/atoms";
 
-const GroupDetail = () => {
+type Props = {
+  groupId: string;
+  currentDirectory: string[];
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const urlStr = (context?.params?.GroupDetail || []) as string[];
+  const groupId = urlStr[0];
+  const currentDirectory: string[] = urlStr.length > 1 ? urlStr.slice(1) : [];
+
+  const props: Props = {
+    groupId: groupId,
+    currentDirectory: currentDirectory,
+  };
+
+  return { props };
+};
+
+const GroupDetail = (props: Props) => {
+  const { groupId, currentDirectory } = props;
   const [urlError, setUrlError] = useState(false);
   const [groupLoading, setGroupLoading] = useState(true);
 
@@ -39,19 +51,14 @@ const GroupDetail = () => {
   const userState = context?.state as UserState;
 
   const router = useRouter();
+  const pathname = router.pathname;
+  const queryname = router.query;
 
-  // useMemoでレンダリング時も更新されない
-  const { groupId, currentDirectory } = useMemo(() => {
-    const queryStr = router.query?.GroupDetail;
-    const groupId = queryStr ? queryStr[0] : "";
-    const currentDirectory = (
-      queryStr && queryStr.length > 1 ? queryStr.slice(1) : []
-    ) as string[];
-    return { groupId, currentDirectory };
-  }, [router]);
+  console.log("pathname: " + pathname);
+  console.log("query: " + JSON.stringify(queryname));
 
-  // // フォルダの多重作成を禁止(1階層まで)
-  // if (currentDirectory.length > 1) setUrlError(true);
+  // フォルダの多重作成を禁止(1階層まで)
+  if (currentDirectory.length > 1) setUrlError(true);
 
   // パンくずリスト用
   const browsePath = "/group/[...GroupDetail]";
