@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       <BreadCrumbs />
 
       <div>
-        <h2 className={layout.center}>エレナカ</h2>
+        <h2 className={layout.center}>エレネカ</h2>
 
         <JoinedGroups />
 
