@@ -192,7 +192,7 @@ const UploadFileToTemp: NextPage = () => {
         rows={1}
         value={businessCardData.telephoneNumber as string}
         type={"text"}
-        inputProps={{ className: classes.input, pattern: "^[0-9]*$" }}
+        inputProps={{ className: classes.input, pattern: "^*[0-9]+$" }}
       />
       <br />
       <TextInput

@@ -1,5 +1,14 @@
+import { makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { ChangeEventHandler, useState } from "react";
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    "&:invalid": {
+      border: "red solid 2px",
+    },
+  },
+}));
 
 type props = {
   fullWidth: boolean;
@@ -17,6 +26,8 @@ type props = {
 };
 
 const TextInput = (props: props) => {
+  const classes = useStyles();
+
   const disabled = props.disabled ? props.disabled : false;
   return (
     <TextField

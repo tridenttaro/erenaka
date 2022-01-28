@@ -9,7 +9,7 @@ type props = {
   rows: number;
   value: string;
   type: string;
-  inputProps?: { className?: any; maxLength?: number; pattern: string };
+  inputProps?: { maxLength?: number; pattern: string };
   inputRef?: any;
   error?: boolean;
   disabled?: boolean;

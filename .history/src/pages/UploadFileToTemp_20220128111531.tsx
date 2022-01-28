@@ -15,19 +15,8 @@ import Head from "next/head";
 import uploadImage from "../lib/firebase/uploadImage";
 import { UserState } from "../types/auth";
 import { BusinessCardData } from "../types/other";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    "&:invalid": {
-      border: "red solid 2px",
-    },
-  },
-}));
 
 const UploadFileToTemp: NextPage = () => {
-  const classes = useStyles();
-
   const context = useContext(AuthContext);
   const userState = context?.state as UserState;
   // const joinedGroupsId = userState.joinedGroups;
@@ -49,6 +38,16 @@ const UploadFileToTemp: NextPage = () => {
     fax: "",
     email: "",
     others: "",
+  });
+  const [inputError, setInputError] = useState({
+    company: false,
+    username: false,
+    position: false,
+    address: false,
+    telephoneNumber: false,
+    fax: false,
+    email: false,
+    others: false,
   });
 
   useEffect(() => {
@@ -192,7 +191,7 @@ const UploadFileToTemp: NextPage = () => {
         rows={1}
         value={businessCardData.telephoneNumber as string}
         type={"text"}
-        inputProps={{ className: classes.input, pattern: "^[0-9]*$" }}
+        inputProps={{ maxLength: 4, pattern: "^[0-9]+$" }}
       />
       <br />
       <TextInput

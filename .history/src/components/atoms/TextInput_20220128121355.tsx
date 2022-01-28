@@ -9,8 +9,8 @@ type props = {
   rows: number;
   value: string;
   type: string;
-  inputProps?: { className?: any; maxLength?: number; pattern: string };
-  inputRef?: any;
+  inputProps?: { className?: unknown; maxLength?: number; pattern: string };
+  inputRef?: unknown;
   error?: boolean;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

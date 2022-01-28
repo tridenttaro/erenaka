@@ -15,15 +15,6 @@ import Head from "next/head";
 import uploadImage from "../lib/firebase/uploadImage";
 import { UserState } from "../types/auth";
 import { BusinessCardData } from "../types/other";
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  input: {
-    "&:invalid": {
-      border: "red solid 2px",
-    },
-  },
-}));
 
 const UploadFileToTemp: NextPage = () => {
   const classes = useStyles();
@@ -192,7 +183,7 @@ const UploadFileToTemp: NextPage = () => {
         rows={1}
         value={businessCardData.telephoneNumber as string}
         type={"text"}
-        inputProps={{ className: classes.input, pattern: "^[0-9]*$" }}
+        inputProps={{ pattern: "^[0-9]+$" }}
       />
       <br />
       <TextInput
