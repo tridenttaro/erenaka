@@ -32,20 +32,16 @@ const QrReaderReceiveFile: NextPage = () => {
     (data) => {
       console.log(data);
       if (returnPage && returnPage !== "") {
-        if (returnPage === "/DownloadFile") {
-          if (data === "" || isNaN(parseInt(data, 10))) {
+        if (data === "" || isNaN(parseInt(data, 10))) {
+          return;
+        } else {
+          const keyNum = parseInt(data, 10);
+          if (keyNum < 0 || keyNum > 99999) {
             return;
           } else {
-            const keyNum = parseInt(data, 10);
-            if (keyNum < 0 || keyNum > 99999) {
-              return;
-            } else {
-              // 読み取った値が正常である
-              router.push({ pathname: returnPage, query: { input: data } });
-            }
+            // 読み取った値が正常である
+            router.push({ pathname: returnPage, query: { input: data } });
           }
-        } else {
-          router.push({ pathname: returnPage, query: { input: data } });
         }
       }
     },
