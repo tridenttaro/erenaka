@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       margin: "10px auto 0 auto",
       height: "auto",
-      width: "65%",
+      width: "60%",
     },
     backgroundColor: "lightYellow",
     wordBreak: "break-word",

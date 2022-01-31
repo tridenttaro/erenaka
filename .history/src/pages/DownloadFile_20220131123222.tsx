@@ -84,7 +84,7 @@ const DownloadFile: NextPage = () => {
   }, [downloadKey, userState, selectedGroup, loading]);
 
   const bc_lists = [
-    { name: "DownloadFile", path: ["DownloadFile", "DownloadFile"] },
+    { name: "ReceiveImage", path: ["UploadFileToTemp", "UploadFileToTemp"] },
   ];
 
   return (

@@ -124,7 +124,7 @@ const UploadFileToTemp: NextPage = () => {
   }, []);
 
   const bc_lists = [
-    { name: "UploadFile", path: ["UploadFileToTemp", "UploadFileToTemp"] },
+    { name: "UploadImage", path: ["UploadFileToTemp", "UploadFileToTemp"] },
   ];
 
   return (

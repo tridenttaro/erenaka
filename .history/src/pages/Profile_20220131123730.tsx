@@ -10,6 +10,7 @@ import { JoinedGroups } from "../components/organisms";
 const useStyles = makeStyles((theme) => ({
   detail: {
     textAlign: "left",
+    padding: "auto 50px",
     [theme.breakpoints.down("sm")]: {
       margin: "20px auto 16px auto",
       height: "auto",
