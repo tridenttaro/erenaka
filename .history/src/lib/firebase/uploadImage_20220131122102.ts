@@ -1,19 +1,63 @@
 import { listAll, ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { useRef } from "react";
 import { db, storage } from ".";
 import { UserState } from "../../types/auth";
+import { BusinessCardData } from "../../types/other";
 
 type Props = {
   image?: File;
-  setImageData: (image: File | undefined) => void;
+  // setImage?: (image: File | undefined) => void;
   groupId?: string;
   currentDirectory?: string[];
+  updateImages?: () => void;
   setDownloadKey?: (str: string) => void;
   userState: UserState;
+  // ローディング制御
+  loading?: boolean;
+  setLoading?: (bool: boolean) => void;
+
+  // 会社のストレージへアップロード時
+  businessCardData?: BusinessCardData;
+  setBusinessCardData?: (data: BusinessCardData) => void;
 };
 
 const uploadImage = async (props: Props) => {
-  if (!props.image) return;
+  if (!props.image) {
+    alert("画像が選択されていません");
+    return;
+  }
+
+  if (props.businessCardData) {
+    const bc = props.businessCardData;
+    if (
+      bc.company == "" ||
+      bc.username == "" ||
+      bc.address == "" ||
+      bc.telephoneNumber == "" ||
+      bc.email == ""
+    ) {
+      alert("必須項目が入力されていません");
+      return;
+    } else {
+      const tel = bc.telephoneNumber;
+      if (!parseInt(tel, 10)) {
+        alert("電話番号には数値のみ入力してください");
+        return;
+      }
+    }
+  }
+
+  if (props.loading !== undefined && props.loading === true) {
+    console.log("連続送信をブロック");
+    return;
+  } else if (
+    props.loading !== undefined &&
+    props.loading === false &&
+    props.setLoading
+  ) {
+    props.setLoading(true);
+  }
 
   const { image, groupId, currentDirectory, userState } = props;
 
@@ -62,17 +106,25 @@ const uploadImage = async (props: Props) => {
     });
 
     const storageRef = ref(storage, `${storagePath}/${newFileName}`);
-    // メタデータに元のファイル名を持たせる
-    const metadata = {
+
+    // メタデータに元のファイル名・名刺データを持たせる(名刺交換時)
+    let metadata = {
       customMetadata: {
         trueFileName: trueFileName,
-        uploadedUid: userState.uid,
+        // uploadedUid: userState.uid,
       },
     };
-    // アップロード
+    if (props.businessCardData) {
+      Object.assign(metadata.customMetadata, { ...props.businessCardData });
+    }
+
     await uploadBytes(storageRef, renamedFile, metadata);
 
-    // firestoreに登録(名刺交換時を除く)
+    // 入力情報の保存
+    const userRef = doc(db, "users", userState.uid, "lastData", "lastData");
+    await setDoc(userRef, { ...props.businessCardData });
+
+    // firestoreに登録(会社のストレージへアップロード時)
     if (groupId) {
       const downloadUrl = await getDownloadURL(storageRef);
 
@@ -90,10 +142,12 @@ const uploadImage = async (props: Props) => {
       }
       const timestamp = Timestamp.now();
       const imageData = {
+        imageId: newFileName,
         createdAt: timestamp,
         fileName: trueFileName,
         uploadedUid: userState.uid,
         downloadUrl: downloadUrl,
+        ...props.businessCardData,
       };
 
       await setDoc(storeRef, imageData);
@@ -103,10 +157,43 @@ const uploadImage = async (props: Props) => {
     if (props.setDownloadKey) {
       props.setDownloadKey(newFileName);
     }
+    // 画面を更新(画像交換時を"除く")
+    if (props.updateImages) {
+      props.updateImages();
+    }
+    // 入力欄を初期化
+    if (props.setBusinessCardData) {
+      props.setBusinessCardData({
+        company: "",
+        username: "",
+        position: "",
+        address: "",
+        telephoneNumber: "",
+        fax: "",
+        email: "",
+        others: "",
+      });
+    }
 
-    // props.setImageData(undefined);
+    if (props.businessCardData) {
+      alert("グループへの画像のアップロードが完了しました。");
+    } else {
+      alert("画像のアップロードが完了しました");
+    }
 
-    alert("画像のアップロードが完了しました");
-  } catch (error) {}
+    if (props.setLoading) {
+      props.setLoading(false);
+    }
+  } catch (error) {
+    if (props.businessCardData) {
+      alert("グループへのアップロードに失敗しました。");
+    } else {
+      alert("アップロードに失敗しました。");
+    }
+
+    if (props.setLoading) {
+      props.setLoading(false);
+    }
+  }
 };
 export default uploadImage;

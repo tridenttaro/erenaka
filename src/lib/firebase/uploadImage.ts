@@ -39,6 +39,12 @@ const uploadImage = async (props: Props) => {
     ) {
       alert("必須項目が入力されていません");
       return;
+    } else {
+      const tel = bc.telephoneNumber;
+      if (!Number.isInteger(Number(tel))) {
+        alert("電話番号には数値のみ入力してください");
+        return;
+      }
     }
   }
 
