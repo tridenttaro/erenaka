@@ -37,7 +37,6 @@ const QrReaderReceiveFile: NextPage = () => {
       />
       <br />
       <div className="module-spacer--small" />
-
       <QrReaderCustom handleScan={qrReaderHandleScan} />
     </>
   );

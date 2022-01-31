@@ -1,7 +1,5 @@
 // import QrReader from "react-qr-reader";
 import dynamic from "next/dynamic";
-import styles from "../../styles/components/atoms/qrreadercustom.module.scss";
-
 const QrReader = dynamic(() => import("react-qr-reader"), { ssr: false });
 
 type Props = {
@@ -15,7 +13,7 @@ const QrReaderCustom = (props: Props) => {
         delay={300}
         onError={(err) => console.error(err)}
         onScan={(data) => props.handleScan(data)}
-        className={styles.reader}
+        style={{ width: "90%" }}
       />
     </>
   );

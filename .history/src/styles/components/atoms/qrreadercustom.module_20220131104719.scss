@@ -1,0 +1,14 @@
+.reader {
+  width: 50%;
+}
+
+@media screen and (max-width: 959px) {
+  .reader {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .reader {
+    width: 90%;
+  }
+}
