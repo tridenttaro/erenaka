@@ -22,12 +22,6 @@ const QrReaderReceiveFile: NextPage = () => {
     }
   }, [router]);
 
-  const handleClick = () => {
-    if (returnPage && returnPage !== "") {
-      router.push({ pathname: returnPage });
-    }
-  };
-
   const qrReaderHandleScan = useCallback(
     (data) => {
       console.log(data);
@@ -54,7 +48,7 @@ const QrReaderReceiveFile: NextPage = () => {
         <title>電子名刺 | QR読み込み</title>
       </Head>
 
-      <PrimaryButton label={"戻る"} onClick={() => handleClick()} />
+      <PrimaryButton label={"戻る"} onClick={() => router.push(returnPage)} />
       <br />
       <div className="module-spacer--small" />
 

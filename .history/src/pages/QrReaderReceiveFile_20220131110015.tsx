@@ -7,26 +7,18 @@ import Head from "next/head";
 const QrReaderReceiveFile: NextPage = () => {
   const router = useRouter();
 
-  const [returnPage, setReturnPage] = useState<string>();
+  const [returnPage, setReturnPage] = useState<string>("/");
 
   useEffect(() => {
     if (router.query.input != undefined && router.query.input != "{}") {
       const q = router.query.input as string;
       if (q === "group") {
-        setReturnPage("/GroupManager");
+        setReturnPage("/RequestToJoinGroup");
       } else if (q === "image") {
         setReturnPage("/DownloadFile");
-      } else {
-        setReturnPage("/");
       }
     }
   }, [router]);
-
-  const handleClick = () => {
-    if (returnPage && returnPage !== "") {
-      router.push({ pathname: returnPage });
-    }
-  };
 
   const qrReaderHandleScan = useCallback(
     (data) => {
@@ -38,14 +30,12 @@ const QrReaderReceiveFile: NextPage = () => {
         if (keyNum < 0 || keyNum > 99999) {
           return;
         } else {
-          if (returnPage && returnPage !== "") {
-            // 読み取った値が正常である
-            router.push({ pathname: returnPage, query: { input: data } });
-          }
+          // 読み取った値が正常である
+          router.push({ pathname: "/DownloadFile", query: { input: data } });
         }
       }
     },
-    [router, returnPage]
+    [router]
   );
 
   return (
@@ -54,7 +44,10 @@ const QrReaderReceiveFile: NextPage = () => {
         <title>電子名刺 | QR読み込み</title>
       </Head>
 
-      <PrimaryButton label={"戻る"} onClick={() => handleClick()} />
+      <PrimaryButton
+        label={"戻る"}
+        onClick={() => router.push("/DownloadFile")}
+      />
       <br />
       <div className="module-spacer--small" />
 
