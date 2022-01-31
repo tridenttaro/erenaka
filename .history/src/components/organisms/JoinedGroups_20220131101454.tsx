@@ -19,7 +19,7 @@ const JoinedGroups = () => {
 
   return (
     <section className="c-section-wrapin">
-      <h2>参加済みグループ一覧</h2>
+      <h2>参加済みのグループ一覧</h2>
 
       <div className="p-grid__row">
         {groupsInfo.length > 0 &&

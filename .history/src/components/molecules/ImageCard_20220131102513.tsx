@@ -251,7 +251,6 @@ const ImageCard = (props: Props) => {
           <hr />
           <br />
           <MenuItem
-            className={classes.menuBtn}
             onClick={() => {
               deleteImageCallback();
               handleClose();

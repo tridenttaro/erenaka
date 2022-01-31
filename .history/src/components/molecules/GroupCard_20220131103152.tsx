@@ -146,13 +146,10 @@ const GroupCard = (props: Props) => {
           <br />
 
           <Typography component="p" color="textSecondary" display="inline">
-            {"※GroupID"}
+            {"GroupID"}
           </Typography>
           <br />
-          <QRCode
-            value={props.groupId}
-            style={{ margin: "10px auto 0 auto" }}
-          />
+          <QRCode value={props.groupId} style={{ margin: "0 auto 0 auto" }} />
         </Menu>
       </CardContent>
     </Card>

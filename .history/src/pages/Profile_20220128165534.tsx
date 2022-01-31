@@ -6,7 +6,6 @@ import { BreadCrumbs } from "../components/molecules";
 import { makeStyles } from "@material-ui/core";
 import { TextDetail } from "../components/atoms";
 import { lightBlue, lightGreen } from "@material-ui/core/colors";
-import { JoinedGroups } from "../components/organisms";
 
 const useStyles = makeStyles((theme) => ({
   detail: {
@@ -53,8 +52,11 @@ const GroupDetail = () => {
           <div className="module-spacer--small" />
           <TextDetail label="ユーザーID" value={userState.uid} />
           <div className="module-spacer--small" />
-
-          <JoinedGroups />
+          {userState.joinedGroups.map((value) => (
+            <>
+              <TextDetail label="" value={value} />
+            </>
+          ))}
 
           <div className="module-spacer--small" />
         </div>

@@ -2,11 +2,10 @@ import { useContext, useState } from "react";
 import Head from "next/head";
 import { UserState } from "../types/auth";
 import { AuthContext } from "../components/organisms/AuthLayout";
-import { BreadCrumbs } from "../components/molecules";
+import { BreadCrumbs, TextList } from "../components/molecules";
 import { makeStyles } from "@material-ui/core";
 import { TextDetail } from "../components/atoms";
 import { lightBlue, lightGreen } from "@material-ui/core/colors";
-import { JoinedGroups } from "../components/organisms";
 
 const useStyles = makeStyles((theme) => ({
   detail: {
@@ -53,9 +52,10 @@ const GroupDetail = () => {
           <div className="module-spacer--small" />
           <TextDetail label="ユーザーID" value={userState.uid} />
           <div className="module-spacer--small" />
-
-          <JoinedGroups />
-
+          <TextList
+            label="参加済みのグループ一覧"
+            list={userState.joinedGroups}
+          />
           <div className="module-spacer--small" />
         </div>
       </div>

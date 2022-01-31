@@ -19,7 +19,7 @@ const ReceiveRequests = () => {
   }, [contextUserState, setRequestsList]);
 
   return (
-    <div style={{ backgroundColor: "lightyellow" }}>
+    <div>
       <h2>受信したグループ参加申請</h2>
 
       <div className="p-grid__row">

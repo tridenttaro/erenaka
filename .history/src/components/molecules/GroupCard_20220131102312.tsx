@@ -12,7 +12,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useCallback, useState } from "react";
 import { GroupData } from "../../types/other";
 import { useRouter } from "next/dist/client/router";
-import QRCode from "qrcode.react";
 
 const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
@@ -143,16 +142,16 @@ const GroupCard = (props: Props) => {
           </Typography>
           <br />
           <hr />
+
           <br />
 
-          <Typography component="p" color="textSecondary" display="inline">
-            {"※GroupID"}
-          </Typography>
-          <br />
-          <QRCode
-            value={props.groupId}
-            style={{ margin: "10px auto 0 auto" }}
-          />
+          <MenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            GroupIDをQRコード表示
+          </MenuItem>
         </Menu>
       </CardContent>
     </Card>

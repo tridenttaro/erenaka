@@ -53,7 +53,7 @@ const GroupDetail = () => {
           <div className="module-spacer--small" />
           <TextDetail label="ユーザーID" value={userState.uid} />
           <div className="module-spacer--small" />
-
+          <p>参加済みグループ</p>
           <JoinedGroups />
 
           <div className="module-spacer--small" />

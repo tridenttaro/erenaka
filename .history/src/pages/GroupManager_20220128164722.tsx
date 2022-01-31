@@ -25,16 +25,9 @@ const GroupManager = () => {
         <ReceiveRequests />
       </Suspense>
 
-      <div className="module-spacer--small" />
-      <hr />
-
       <CreateGroup />
-
-      <div className="module-spacer--small" />
       <hr />
       <RequestToJoinGroup />
-      <div className="module-spacer--small" />
-      <hr />
     </>
   );
 };

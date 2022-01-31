@@ -5,14 +5,12 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Divider,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCallback, useState } from "react";
 import { GroupData } from "../../types/other";
 import { useRouter } from "next/dist/client/router";
-import QRCode from "qrcode.react";
 
 const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
@@ -52,16 +50,12 @@ const useStyles = makeStyles((theme) => ({
   },
   txt: {},
   colorTxt: {
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     width: "100%",
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 16,
   },
   menu: {
     margin: "auto 0 auto auto",
-  },
-  menuBtn: {
-    backgroundColor: "lightGray",
   },
 }));
 
@@ -88,6 +82,9 @@ const GroupCard = (props: Props) => {
             router.push("/group/[...GroupDetail]", `/group/${props.groupId}`)
           }
         >
+          <Typography component="p" className={classes.title}>
+            {"グループ"}
+          </Typography>
           <Typography component="p" color="textSecondary" display="inline">
             {"グループ名: "}
           </Typography>
@@ -109,7 +106,7 @@ const GroupCard = (props: Props) => {
           <br />
         </div>
         {/* メニュー開閉用のボタン*/}
-        <IconButton onClick={handleClick} className={classes.menu}>
+        <IconButton onClick={handleClick}>
           <MoreVertIcon />
         </IconButton>
 
@@ -142,17 +139,14 @@ const GroupCard = (props: Props) => {
             {props.createdUid}
           </Typography>
           <br />
-          <hr />
-          <br />
 
-          <Typography component="p" color="textSecondary" display="inline">
-            {"※GroupID"}
-          </Typography>
-          <br />
-          <QRCode
-            value={props.groupId}
-            style={{ margin: "10px auto 0 auto" }}
-          />
+          {/* <MenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            グループから抜ける(仮)
+          </MenuItem> */}
         </Menu>
       </CardContent>
     </Card>

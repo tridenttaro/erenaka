@@ -1,10 +1,9 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import requestJoinGroup from "../../lib/firebase/groups/requestToJoinGroup";
 import { AuthContext } from "./AuthLayout";
 import { UserState } from "../../types/auth";
 import { PrimaryButton, TextInput } from "../atoms";
 import Link from "next/link";
-import { useRouter } from "next/dist/client/router";
 
 type Props = {};
 
@@ -13,11 +12,9 @@ const RequestToJoinGroup = () => {
   const context = useContext(AuthContext);
   const contextUserState = context?.state as UserState;
 
-  const router = useRouter();
-
   useEffect(() => {
     if (router.query.input != undefined && router.query.input != "{}") {
-      setGroupId(router.query.input as string);
+      setDownloadKey(router.query.input as string);
     }
   }, [router]);
 
@@ -56,7 +53,7 @@ const RequestToJoinGroup = () => {
       <br />
       <Link href="/QrReaderReceiveFile" passHref>
         {/* <a className={styles.card}>UploadFile</a> */}
-        <a style={{ color: "blue" }}>QRコードで読み取る</a>
+        <a>QRコードで読み取る</a>
       </Link>
     </>
   );

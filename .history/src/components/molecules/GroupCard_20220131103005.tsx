@@ -143,15 +143,21 @@ const GroupCard = (props: Props) => {
           </Typography>
           <br />
           <hr />
+
           <br />
 
-          <Typography component="p" color="textSecondary" display="inline">
-            {"※GroupID"}
-          </Typography>
-          <br />
+          <MenuItem
+            className={classes.menuBtn}
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            GroupIDをQRコード表示
+          </MenuItem>
+
           <QRCode
             value={props.groupId}
-            style={{ margin: "10px auto 0 auto" }}
+            style={{ margin: "30px auto auto 30px" }}
           />
         </Menu>
       </CardContent>

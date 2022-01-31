@@ -56,7 +56,7 @@ const RequestToJoinGroup = () => {
       <br />
       <Link href="/QrReaderReceiveFile" passHref>
         {/* <a className={styles.card}>UploadFile</a> */}
-        <a style={{ color: "blue" }}>QRコードで読み取る</a>
+        <a>QRコードで読み取る</a>
       </Link>
     </>
   );
