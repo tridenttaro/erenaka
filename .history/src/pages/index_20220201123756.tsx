@@ -10,10 +10,11 @@ import { CircularProgress } from "@material-ui/core";
 import dynamic from "next/dynamic";
 
 const JoinedGroups = dynamic(
-  () => import("../components/organisms/JoinedGroups")
-  // {
-  //   suspense: true,
-  // }
+  () => import("../components/organisms/JoinedGroups"),
+  {
+    suspense: true,
+    ssr: false,
+  }
 );
 
 const Home: NextPage = () => {
@@ -30,9 +31,9 @@ const Home: NextPage = () => {
       <div>
         <h2 className={layout.center}>エレネカ</h2>
 
-        {/* <Suspense fallback={<CircularProgress />}> */}
-        <JoinedGroups />
-        {/* </Suspense> */}
+        <Suspense fallback={<CircularProgress />}>
+          <JoinedGroups />
+        </Suspense>
       </div>
     </div>
   );

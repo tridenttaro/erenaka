@@ -1,9 +1,19 @@
-import { useEffect, useCallback, useReducer, createContext } from "react";
+import {
+  useEffect,
+  useCallback,
+  useReducer,
+  createContext,
+  useState,
+} from "react";
 import { useRouter } from "next/dist/client/router";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import listenAuthState from "../../lib/firebase/auth/listenAuthState";
 import { AuthContextType, UserState } from "../../types/auth";
 import { PrimaryButton } from "../atoms";
+import { Header } from ".";
+import layout from "../../styles/layout.module.scss";
+import Head from "next/head";
+import { CircularProgress } from "@material-ui/core";
 
 // ReduxToolkit-useReducerの場合実際は初期化されず型定義しかされない
 const initialState: UserState = {
@@ -54,11 +64,10 @@ const AuthLayout = (props: Props) => {
   const router = useRouter();
   const pathName = router.pathname;
 
+  const [loading, setLoading] = useState(true);
   const [state, dispatch] = useReducer(userSlice.reducer, initialState);
   const { signedIn, signedOut, joinedGroup } = userSlice.actions;
 
-  console.log("Authレンダリング発生");
-  console.log("pathName: " + pathName);
   console.log("userState: " + JSON.stringify(state));
 
   const signedInCallback = useCallback(
@@ -70,8 +79,7 @@ const AuthLayout = (props: Props) => {
 
   useEffect(() => {
     if (!state.isSignedIn) {
-      // サインインしていない
-      listenAuthState({ signedIn: signedInCallback });
+      listenAuthState({ signedIn: signedInCallback, setLoading });
     }
   }, [state.isSignedIn, signedInCallback]);
 
@@ -93,29 +101,41 @@ const AuthLayout = (props: Props) => {
     joinedGroup: joinedGroupCallback,
   };
 
-  if (
-    !state.isSignedIn &&
-    pathName != "/" &&
-    pathName != "/SignIn" &&
-    pathName != "/SignUp"
-  ) {
-    return (
-      <>
-        <p>ログインが必要です</p>
-        <PrimaryButton
-          label={"ログインページへ"}
-          onClick={() => router.push("/SignIn")}
-        />
-      </>
-    );
-  } else {
-    // return <>{props.children}</>;
-    return (
+  return (
+    <div className={layout.pageWrapper}>
+      <Head>
+        <meta name="description" content="エレネカ | 電子名刺サービス" />
+        <meta property="og:title" content={"エレネカ"} />
+        <meta property="og:description" content={"電子名刺サービスです。"} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <AuthContext.Provider value={contextValue}>
-        {props.children}
+        <Header />
+        {loading ? (
+          <div style={{ margin: "0 auto", textAlign: "center" }}>
+            <p>Loading...</p>
+            <CircularProgress />
+          </div>
+        ) : !state.isSignedIn &&
+          pathName != "/SignIn" &&
+          pathName != "/SignUp" &&
+          pathName != "/PassReset" ? (
+          <div>
+            <Head>
+              <title>電子名刺 | 未ログイン</title>
+            </Head>
+            <p>ログインが必要です</p>
+            <PrimaryButton
+              label={"ログインページへ"}
+              onClick={() => router.push("/SignIn")}
+            />
+          </div>
+        ) : (
+          <div>{props.children}</div>
+        )}
       </AuthContext.Provider>
-    );
-  }
+    </div>
+  );
 };
 
 export default AuthLayout;

@@ -4,17 +4,9 @@ import layout from "../styles/layout.module.scss";
 import Link from "next/link";
 import { useContext, useCallback, Suspense } from "react";
 import { AuthContext } from "../components/organisms/AuthLayout";
-// import { JoinedGroups } from "../components/organisms";
+import { JoinedGroups } from "../components/organisms";
 import { BreadCrumbs } from "../components/molecules";
 import { CircularProgress } from "@material-ui/core";
-import dynamic from "next/dynamic";
-
-const JoinedGroups = dynamic(
-  () => import("../components/organisms/JoinedGroups")
-  // {
-  //   suspense: true,
-  // }
-);
 
 const Home: NextPage = () => {
   const context = useContext(AuthContext);
@@ -30,9 +22,13 @@ const Home: NextPage = () => {
       <div>
         <h2 className={layout.center}>エレネカ</h2>
 
-        {/* <Suspense fallback={<CircularProgress />}> */}
-        <JoinedGroups />
-        {/* </Suspense> */}
+        <Suspense fallback={<CircularProgress />}>
+          <JoinedGroups />
+        </Suspense>
+
+        {/* <Link href={browsePath} as={truePath}>
+          <a>TestTest</a>
+        </Link> */}
       </div>
     </div>
   );

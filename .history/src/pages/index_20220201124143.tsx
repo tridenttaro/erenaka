@@ -10,10 +10,10 @@ import { CircularProgress } from "@material-ui/core";
 import dynamic from "next/dynamic";
 
 const JoinedGroups = dynamic(
-  () => import("../components/organisms/JoinedGroups")
-  // {
-  //   suspense: true,
-  // }
+  () => import("../components/organisms/JoinedGroups"),
+  {
+    suspense: true,
+  }
 );
 
 const Home: NextPage = () => {

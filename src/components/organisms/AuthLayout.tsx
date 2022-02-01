@@ -104,8 +104,10 @@ const AuthLayout = (props: Props) => {
   return (
     <div className={layout.pageWrapper}>
       <Head>
-        <meta name="description" content="電子名刺サービス" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <meta name="description" content="エレネカ | 電子名刺サービス" />
+        <meta property="og:title" content={"エレネカ"} />
+        <meta property="og:description" content={"電子名刺サービスです。"} />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthContext.Provider value={contextValue}>
         <Header />
@@ -119,6 +121,9 @@ const AuthLayout = (props: Props) => {
           pathName != "/SignUp" &&
           pathName != "/PassReset" ? (
           <div>
+            <Head>
+              <title>電子名刺 | 未ログイン</title>
+            </Head>
             <p>ログインが必要です</p>
             <PrimaryButton
               label={"ログインページへ"}
