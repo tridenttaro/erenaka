@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = GroupData & {
-  updateGroups: (joinedGroupsId: string[]) => void;
+  updateGroups: () => void;
 };
 
 const GroupCard = (props: Props) => {

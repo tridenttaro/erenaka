@@ -101,6 +101,8 @@ const ImageCard = (props: Props) => {
     setAnchorEl(null);
   }, []);
 
+  const leaveGroupCallback = useCallback(() => {}, []);
+
   const deleteImageCallback = useCallback(() => {
     deleteImage({ imageId, groupId, currentDirectory, updateImages });
   }, [imageId, groupId, currentDirectory, updateImages]);
@@ -248,6 +250,16 @@ const ImageCard = (props: Props) => {
           </Typography>
           <br />
           <hr />
+          {/* <br/>
+          <MenuItem
+            className={classes.menuBtn}
+            onClick={() => {
+              leaveGroupCallback()
+              handleClose();
+            }}
+          >
+            グループから抜ける
+          </MenuItem> */}
           <br />
           <MenuItem
             className={classes.menuBtn}

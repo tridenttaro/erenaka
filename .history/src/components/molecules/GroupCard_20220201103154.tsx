@@ -9,13 +9,10 @@ import {
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import { GroupData } from "../../types/other";
 import { useRouter } from "next/dist/client/router";
 import QRCode from "qrcode.react";
-import { AuthContext } from "../organisms/AuthLayout";
-import { UserState, JoinedGroup } from "../../types/auth";
-import leaveGroup from "../../lib/firebase/groups/leaveGroup";
 
 const useStyles = makeStyles((theme) => ({
   // theme...meterial-uiにあるテーマ
@@ -68,27 +65,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type Props = GroupData & {
-  updateGroups: (joinedGroupsId: string[]) => void;
-};
+type Props = GroupData;
 
 const GroupCard = (props: Props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const router = useRouter();
-
-  const context = useContext(AuthContext);
-  const userState = context?.state as UserState;
-  const joinedGroup = context?.joinedGroup as JoinedGroup;
-
-  const leaveGroupCallback = useCallback(() => {
-    leaveGroup({
-      groupId: props.groupId,
-      userState,
-      joinedGroup,
-      updateGroups: props.updateGroups,
-    });
-  }, [props.groupId, userState, joinedGroup, props.updateGroups]);
 
   const handleClick = useCallback((event: any) => {
     setAnchorEl(event.currentTarget);
@@ -138,33 +120,6 @@ const GroupCard = (props: Props) => {
           onClose={handleClose}
         >
           <Typography component="p" color="textSecondary" display="inline">
-            {"※GroupID"}
-          </Typography>
-          <br />
-          <QRCode
-            value={props.groupId}
-            style={{ margin: "10px auto 0 auto" }}
-          />
-          <br />
-          <hr />
-
-          <Typography component="p" color="textSecondary" display="inline">
-            {"グループ名: "}
-          </Typography>
-          <Typography component="p" display="inline">
-            {props.groupName}
-          </Typography>
-          <br />
-
-          <Typography component="p" color="textSecondary" display="inline">
-            {"GroupID: "}
-          </Typography>
-          <Typography component="p" display="inline">
-            {props.groupId}
-          </Typography>
-          <br />
-
-          <Typography component="p" color="textSecondary" display="inline">
             {"更新日時: "}
           </Typography>
           <Typography component="p" display="inline">
@@ -188,17 +143,26 @@ const GroupCard = (props: Props) => {
           </Typography>
           <br />
           <hr />
-          <br />
+          {/* <br/>
           <MenuItem
             className={classes.menuBtn}
             onClick={() => {
-              leaveGroupCallback();
+              leaveGroupCallback()
               handleClose();
             }}
           >
             グループから抜ける
-          </MenuItem>
+          </MenuItem> */}
           <br />
+
+          <Typography component="p" color="textSecondary" display="inline">
+            {"※GroupID"}
+          </Typography>
+          <br />
+          <QRCode
+            value={props.groupId}
+            style={{ margin: "10px auto 0 auto" }}
+          />
         </Menu>
       </CardContent>
     </Card>

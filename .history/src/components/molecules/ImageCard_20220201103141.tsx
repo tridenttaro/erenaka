@@ -101,6 +101,8 @@ const ImageCard = (props: Props) => {
     setAnchorEl(null);
   }, []);
 
+  const leaveGroupCallback = useCallback(() => {}, [groupId]);
+
   const deleteImageCallback = useCallback(() => {
     deleteImage({ imageId, groupId, currentDirectory, updateImages });
   }, [imageId, groupId, currentDirectory, updateImages]);

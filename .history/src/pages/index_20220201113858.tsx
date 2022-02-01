@@ -4,6 +4,7 @@ import layout from "../styles/layout.module.scss";
 import Link from "next/link";
 import { useContext, useCallback } from "react";
 import { AuthContext } from "../components/organisms/AuthLayout";
+import { SignedOut } from "../types/auth";
 import { JoinedGroups } from "../components/organisms";
 import { BreadCrumbs } from "../components/molecules";
 

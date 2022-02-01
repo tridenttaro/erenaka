@@ -17,14 +17,9 @@ const JoinedGroups = () => {
     getGroupsInfo({ joinedGroupsId, setGroupsInfo });
   }, [joinedGroupsId]);
 
-  const updateGroups = useCallback((joinedGroupsId: string[]) => {
+  const updateGroups = useCallback(() => {
     getGroupsInfo({ joinedGroupsId, setGroupsInfo });
-  }, []);
-  // const updateGroups = useCallback(() => {
-  //   getGroupsInfo({ joinedGroupsId, setGroupsInfo });
-  // }, [joinedGroupsId]);
-
-  console.log("jg_joinedgroupsid: " + JSON.stringify(joinedGroupsId));
+  }, [joinedGroupsId]);
 
   return (
     <section className="c-section-wrapin">

@@ -101,6 +101,8 @@ const ImageCard = (props: Props) => {
     setAnchorEl(null);
   }, []);
 
+  const leaveGroupCallback = useCallback(() => {}, [groupId]);
+
   const deleteImageCallback = useCallback(() => {
     deleteImage({ imageId, groupId, currentDirectory, updateImages });
   }, [imageId, groupId, currentDirectory, updateImages]);
@@ -248,6 +250,7 @@ const ImageCard = (props: Props) => {
           </Typography>
           <br />
           <hr />
+
           <br />
           <MenuItem
             className={classes.menuBtn}

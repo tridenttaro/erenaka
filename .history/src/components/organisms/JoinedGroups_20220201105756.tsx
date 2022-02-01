@@ -10,21 +10,16 @@ const JoinedGroups = () => {
   const [groupsInfo, setGroupsInfo] = useState<GroupData[]>([]);
 
   const context = useContext(AuthContext);
-  const userState = context?.state as UserState;
-  const joinedGroupsId = userState.joinedGroups;
+  const contextUserState = context?.state as UserState;
+  const joinedGroupsId = contextUserState.joinedGroups;
 
   useEffect(() => {
     getGroupsInfo({ joinedGroupsId, setGroupsInfo });
-  }, [joinedGroupsId]);
+  }, [joinedGroupsId, setGroupsInfo]);
 
-  const updateGroups = useCallback((joinedGroupsId: string[]) => {
+  const updateGroups = useCallback(() => {
     getGroupsInfo({ joinedGroupsId, setGroupsInfo });
-  }, []);
-  // const updateGroups = useCallback(() => {
-  //   getGroupsInfo({ joinedGroupsId, setGroupsInfo });
-  // }, [joinedGroupsId]);
-
-  console.log("jg_joinedgroupsid: " + JSON.stringify(joinedGroupsId));
+  }, [joinedGroupsId, setGroupsInfo]);
 
   return (
     <section className="c-section-wrapin">

@@ -14,7 +14,7 @@ import { GroupData } from "../../types/other";
 import { useRouter } from "next/dist/client/router";
 import QRCode from "qrcode.react";
 import { AuthContext } from "../organisms/AuthLayout";
-import { UserState, JoinedGroup } from "../../types/auth";
+import { UserState } from "../../types/auth";
 import leaveGroup from "../../lib/firebase/groups/leaveGroup";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = GroupData & {
-  updateGroups: (joinedGroupsId: string[]) => void;
+  updateGroups: () => void;
 };
 
 const GroupCard = (props: Props) => {
@@ -79,16 +79,14 @@ const GroupCard = (props: Props) => {
 
   const context = useContext(AuthContext);
   const userState = context?.state as UserState;
-  const joinedGroup = context?.joinedGroup as JoinedGroup;
 
   const leaveGroupCallback = useCallback(() => {
     leaveGroup({
       groupId: props.groupId,
       userState,
-      joinedGroup,
       updateGroups: props.updateGroups,
     });
-  }, [props.groupId, userState, joinedGroup, props.updateGroups]);
+  }, [props.groupId, userState, props.updateGroups]);
 
   const handleClick = useCallback((event: any) => {
     setAnchorEl(event.currentTarget);
